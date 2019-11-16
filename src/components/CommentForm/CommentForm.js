@@ -9,10 +9,10 @@ export default class CommentForm extends Component {
 
 	handleSubmit = ev => {
 		ev.preventDefault();
-		const { Session } = this.context;
+		const { session } = this.context;
 		const { text, rating } = ev.target;
 
-		SessionApiService.postComment(Session.id, text.value, Number(rating.value))
+		SessionApiService.postComment(session.id, text.value, Number(rating.value))
 			.then(this.context.addComment)
 			.then(() => {
 				text.value = '';
@@ -36,10 +36,10 @@ export default class CommentForm extends Component {
 				</div>
 
 				<div className="select">
-					<label htmlFor="rating">Rate this Session!</label>
+					<label htmlFor="rating">Rate this session!</label>
 					<select
 						required
-						aria-label="Rate this Session!"
+						aria-label="Rate this session!"
 						name="rating"
 						id="rating"
 					>

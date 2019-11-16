@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import SessionListContext from '../../contexts/SessionListContext';
 import SessionApiService from '../../services/session-api-service';
-import { Section } from '../../components/Utils/Utils';
 import SessionListItem from '../../components/SessionListItem/SessionListItem';
 import './SessionListPage.css';
 
@@ -16,22 +15,24 @@ export default class SessionListPage extends Component {
 	}
 
 	renderSessions() {
-		const { SessionList = [] } = this.context;
-		return SessionList.map(Session => (
-			<SessionListItem key={Session.id} Session={Session} />
+		const { sessionList = [] } = this.context;
+		return sessionList.map(session => (
+			<li className="item" key={session.code}>
+				<SessionListItem session={session} />
+			</li>
 		));
 	}
 
 	render() {
 		const { error } = this.context;
 		return (
-			<Section list className="SessionListPage">
+			<section>
 				{error ? (
-					<p className="red">There was an error, try again</p>
+					<p className="error">There was an error, try again</p>
 				) : (
-					this.renderSessions()
+					<ul className="sessions-list">{this.renderSessions()}</ul>
 				)}
-			</Section>
+			</section>
 		);
 	}
 }

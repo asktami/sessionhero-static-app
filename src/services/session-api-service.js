@@ -9,8 +9,15 @@ const SessionApiService = {
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
-	getSession(SessionId) {
-		return fetch(`${config.API_ENDPOINT}/sessions/${SessionId}`, {
+	getSchedule() {
+		return fetch(`${config.API_ENDPOINT}/schedule`, {
+			headers: {}
+		}).then(res =>
+			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+		);
+	},
+	getSession(sessionId) {
+		return fetch(`${config.API_ENDPOINT}/sessions/${sessionId}`, {
 			headers: {
 				authorization: `bearer ${TokenService.getAuthToken()}`
 			}
@@ -18,8 +25,8 @@ const SessionApiService = {
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
-	getSessionComments(SessionId) {
-		return fetch(`${config.API_ENDPOINT}/sessions/${SessionId}/comments`, {
+	getSessionComments(sessionId) {
+		return fetch(`${config.API_ENDPOINT}/sessions/${sessionId}/comments`, {
 			headers: {
 				authorization: `bearer ${TokenService.getAuthToken()}`
 			}
@@ -27,7 +34,7 @@ const SessionApiService = {
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
-	postComment(SessionId, text, rating) {
+	postComment(sessionId, comment, rating) {
 		return fetch(`${config.API_ENDPOINT}/comments`, {
 			method: 'POST',
 			headers: {
@@ -35,9 +42,9 @@ const SessionApiService = {
 				authorization: `bearer ${TokenService.getAuthToken()}`
 			},
 			body: JSON.stringify({
-				Session_id: SessionId,
+				session_id: sessionId,
 				rating,
-				text
+				comment
 			})
 		}).then(res =>
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()

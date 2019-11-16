@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SessionContext from '../../contexts/SessionContext';
 import SessionApiService from '../../services/session-api-service';
-import { Hyph, Section } from '../../components/Utils/Utils';
+import { Pipe, Section } from '../../components/Utils/Utils';
+
+import SessionListItem from '../../components/SessionListItem/SessionListItem';
+
 import { SessionStarRating } from '../../components/SessionStarRating/SessionStarRating';
 import CommentForm from '../../components/CommentForm/CommentForm';
 import './SessionPage.css';
@@ -30,15 +33,11 @@ export default class SessionPage extends Component {
 	}
 
 	renderSession() {
-		const { Session, comments } = this.context;
+		const { session, comments } = this.context;
 		return (
 			<>
-				<div
-					className="SessionPage__image"
-					style={{ backgroundImage: `url(${Session.image})` }}
-				/>
-				<h2>{Session.title}</h2>
-				<SessionContent Session={Session} />
+				<h2>{session.name}</h2>
+				<SessionListItem session={session} />
 				<SessionComments comments={comments} />
 				<CommentForm />
 			</>
@@ -46,26 +45,22 @@ export default class SessionPage extends Component {
 	}
 
 	render() {
-		const { error, Session } = this.context;
+		const { error, session } = this.context;
 		let content;
 		if (error) {
 			content =
 				error.error === `Session doesn't exist` ? (
-					<p className="red">Session not found</p>
+					<p className="error">Session not found</p>
 				) : (
-					<p className="red">There was an error</p>
+					<p className="error">There was an error</p>
 				);
-		} else if (!Session.id) {
+		} else if (!session.id) {
 			content = <div className="loading" />;
 		} else {
 			content = this.renderSession();
 		}
-		return <Section className="SessionPage">{content}</Section>;
+		return { content };
 	}
-}
-
-function SessionContent({ Session }) {
-	return <p className="SessionPage__content">{Session.content}</p>;
 }
 
 function SessionComments({ comments = [] }) {
@@ -83,7 +78,7 @@ function SessionComments({ comments = [] }) {
 					</p>
 					<p className="SessionPage__review-user">
 						<SessionStarRating rating={comment.rating} />
-						<Hyph />
+						<Pipe />
 						{'did-not-find comment.user.full_name'}
 					</p>
 				</li>

@@ -71,7 +71,7 @@
 			"location": "Osceola D",
 			"code": "INT20",
 			"name": "FileMaker and Peripherals",
-			"description": "You can enhance your custom apps created for iOS by using hardware peripherals that fit with FileMaker. Peripherals can add features to your app like: payment processing, bluetooth-based printing, RFID scanning, NFC scanning,1D/2D barcode scanning, encrypted payment capture, AR, and more! This session will introduce you to examples of these peripherals and walk you through how your FileMaker app on an iOS device can communicate with peripherals so that you can take advantage of these advanced features. This session will also help you envision how peripherals can take your FileMaker Go apps to the next level.",
+			"description": "You can enhance your custom apps created for iOS by using hardware peripherals that fit with FileMaker. Peripherals can add features to your app like: payment processing, bluetooth-based printing, RFcode scanning, NFC scanning,1D/2D barcode scanning, encrypted payment capture, AR, and more! This session will introduce you to examples of these peripherals and walk you through how your FileMaker app on an iOS device can communicate with peripherals so that you can take advantage of these advanced features. This session will also help you envision how peripherals can take your FileMaker Go apps to the next level.",
 			"background": "Experience creating FileMaker apps.",
 			"objective_1": "Introduction to peripherals that work with FileMaker Go",
 			"objective_2": "How peripherals can enhance your FileMaker Go custom apps",
@@ -133,7 +133,7 @@
 			"text": "This thing is amazing.",
 			"rating": 4,
 			"date_created": "2019-10-31 23:14:12.649275",
-			"id_session": 1,
+			"code_session": 1,
 			"id_user": 1
 		},
 		{
@@ -141,7 +141,7 @@
 			"text": "Put a bird on it!",
 			"rating": 4,
 			"date_created": "2019-10-31 23:14:12.649275",
-			"id_session": 1,
+			"code_session": 1,
 			"id_user": 1
 		},
 		{
@@ -149,7 +149,7 @@
 			"text": "All the other reviewers are obviously insane, but this thing is actually pretty amazing.",
 			"rating": 5,
 			"date_created": "2019-10-31 23:14:12.649275",
-			"id_session": 1,
+			"code_session": 1,
 			"id_user": 2
 		},
 		{
@@ -157,7 +157,7 @@
 			"text": "When life gives you lemons, trade them for this thing.",
 			"rating": 4,
 			"date_created": "2019-10-31 23:14:12.649275",
-			"id_session": 1,
+			"code_session": 1,
 			"id_user": 2
 		}
 	],
@@ -176,6 +176,23 @@
 			"full_name": "Demo User2",
 			"date_created": "2019-10-31 23:14:12.649275",
 			"date_modified": ""
+		}
+	],
+	"schedule": [
+		{
+			"id": 1,
+			"id_session": "BUS04",
+			"id_user" : 1
+		},
+		{
+			"id": 2,
+			"id_session": "CRE12",
+			"id_user" : 1
+		},
+		{
+			"id": 3,
+			"id_session": "TRA08",
+			"id_user" : 1
 		}
 	]
 }

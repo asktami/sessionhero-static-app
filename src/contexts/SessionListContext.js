@@ -1,45 +1,54 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 const SessionListContext = React.createContext({
-  SessionList: [],
-  error: null,
-  setError: () => {},
-  clearError: () => {},
-  setSessionList: () => {},
-})
-export default SessionListContext
+	sessionList: [],
+	scheduleList: [],
+	error: null,
+	setError: () => {},
+	clearError: () => {},
+	setSessionList: () => {},
+	setScheduleList: () => {}
+});
+export default SessionListContext;
 
 export class SessionListProvider extends Component {
-  state = {
-    SessionList: [],
-    error: null,
-  };
+	state = {
+		sessionList: [],
+		scheduleList: [],
+		error: null
+	};
 
-  setSessionList = SessionList => {
-    this.setState({ SessionList })
-  }
+	setSessionList = sessionList => {
+		this.setState({ sessionList });
+	};
 
-  setError = error => {
-    console.error(error)
-    this.setState({ error })
-  }
+	setScheduleList = scheduleList => {
+		this.setState({ scheduleList });
+	};
 
-  clearError = () => {
-    this.setState({ error: null })
-  }
+	setError = error => {
+		console.error(error);
+		this.setState({ error });
+	};
 
-  render() {
-    const value = {
-      SessionList: this.state.SessionList,
-      error: this.state.error,
-      setError: this.setError,
-      clearError: this.clearError,
-      setSessionList: this.setSessionList,
-    }
-    return (
-      <SessionListContext.Provider value={value}>
-        {this.props.children}
-      </SessionListContext.Provider>
-    )
-  }
+	clearError = () => {
+		this.setState({ error: null });
+	};
+
+	render() {
+		const value = {
+			sessionList: this.state.sessionList,
+			scheduleList: this.state.scheduleList,
+			error: this.state.error,
+			setError: this.setError,
+			clearError: this.clearError,
+			setSessionList: this.setSessionList,
+			setScheduleList: this.setScheduleList
+		};
+		return (
+			<SessionListContext.Provider value={value}>
+				{this.props.children}
+			</SessionListContext.Provider>
+		);
+	}
 }
