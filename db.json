@@ -72,8 +72,7 @@
     "location": "Osceola D",
     "code": "INT20",
     "name": "FileMaker and Peripherals",
-    "description": "You can enhance your custom apps created for iOS by using hardware peripherals that fit with FileMaker. Peripherals can add features to your app like: payment processing, bluetooth-based printing, RFID scanning, NFC scanning,1D/2D barcode scanning, encrypted payment capture, AR, and more! 
-    This session will introduce you to examples of these peripherals and walk you through how your FileMaker app on an iOS device can communicate with peripherals so that you can take advantage of these advanced features. This session will also help you envision how peripherals can take your FileMaker Go apps to the next level.",
+    "description": "You can enhance your custom apps created for iOS by using hardware peripherals that fit with FileMaker. Peripherals can add features to your app like: payment processing, bluetooth-based printing, RFID scanning, NFC scanning,1D/2D barcode scanning, encrypted payment capture, AR, and more! This session will introduce you to examples of these peripherals and walk you through how your FileMaker app on an iOS device can communicate with peripherals so that you can take advantage of these advanced features. This session will also help you envision how peripherals can take your FileMaker Go apps to the next level.",
     "background": "Experience creating FileMaker apps.",
     "objective_1": "Introduction to peripherals that work with FileMaker Go",
     "objective_2": "How peripherals can enhance your FileMaker Go custom apps",
@@ -105,8 +104,7 @@
     "location": "Osceola 1 - 3",
     "code": "TRA08",
     "name": "JavaScript for FileMaker Developers",
-    "description": "JavaScript is natively supported in all parts of the FileMaker Platform. The first part of this course is focused on scope, variables, and functions, connecting those concepts to your existing FileMaker skills.
-    The day will be packed. We'll explore a lot, and have a good time.",
+    "description": "JavaScript is natively supported in all parts of the FileMaker Platform. The first part of this course is focused on scope, variables, and functions, connecting those concepts to your existing FileMaker skills.\n\rThe day will be packed. We'll explore a lot, and have a good time.",
     "background": "You don’t need to know any JavaScript, so come only with your FileMaker skills.",
     "objective_1": "The basics of the JavaScript language",
     "objective_2": "The peculiarities of the web viewer object on different operating systems",
@@ -129,7 +127,7 @@
     "objective_3": "",
     "objective_4": "",
     "speaker": "Brandon Hayes (Kalos Consulting Inc.)"
-  },
+},
 ],
 "comments": [
 		{
