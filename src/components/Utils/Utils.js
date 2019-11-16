@@ -5,7 +5,7 @@ export function Pipe() {
 	return <span className="pipe">{' | '}</span>;
 }
 // to convert session.track to color
-export function getColor({ str }) {
+export function getColor(str) {
 	return str
 		.split(' ')
 		.join('-')
@@ -13,7 +13,7 @@ export function getColor({ str }) {
 }
 
 // to convert time to 12 hour format
-export function getTime({ dateStr, timeStr, locale = 'en-US' }) {
+export function getTime(dateStr, timeStr, locale = 'en-US') {
 	let time = new Date(dateStr + ' ' + timeStr);
 	return time.toLocaleString(locale, {
 		hour: 'numeric',
@@ -23,13 +23,13 @@ export function getTime({ dateStr, timeStr, locale = 'en-US' }) {
 }
 
 // to get dayNumber
-export function getDayNumber({ dateStr, locale = 'en-US' }) {
+export function getDayNumber(dateStr, locale = 'en-US') {
 	var date = new Date(dateStr);
 	return date.toLocaleDateString(locale, { day: 'numeric' });
 }
 
 // to get 3 character dayName
-export function getDayName({ dateStr, locale = 'en-US' }) {
+export function getDayName(dateStr, locale = 'en-US') {
 	var date = new Date(dateStr);
 	return date.toLocaleDateString(locale, { weekday: 'short' });
 }
@@ -52,11 +52,4 @@ export function Required({ className, ...props }) {
 			&#42;
 		</span>
 	);
-}
-
-export function Section({ className, list, ...props }) {
-	const classes = ['Section', list && 'Section--list', className]
-		.filter(Boolean)
-		.join(' ');
-	return <section className={classes} {...props} />;
 }
