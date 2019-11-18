@@ -26,8 +26,9 @@ class App extends Component {
 	render() {
 		return (
 			<>
+				{/* TBD how to get props.location to Header??? */}
 				<Nav />
-				<Header {...this.props.location} />
+				<Header {...this.props} />
 				<SearchBar />
 
 				<main className="wrapper">

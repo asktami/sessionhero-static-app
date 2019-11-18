@@ -9,17 +9,11 @@ export default class Header extends Component {
 		TokenService.clearAuthToken();
 	};
 
-	handleScheduleClick = () => {
-		// TBD
-	};
-
 	renderLogoutLink() {
 		return (
 			<nav>
 				<div>
-					<Link onClick={this.handleScheduleClick} to="/schedule">
-						Schedule
-					</Link>
+					<Link to="/schedule">Schedule</Link>
 					<Pipe />
 					<Link onClick={this.handleLogoutClick} to="/">
 						Logout
