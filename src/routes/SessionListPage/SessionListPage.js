@@ -18,10 +18,12 @@ export default class SessionListPage extends Component {
 			.then(this.context.setSessionList)
 			.catch(this.context.setError);
 
+		console.log('log from cdm');
+
 		// WHY DOES "this.updateSessionList" THIS NOT WORK HERE?
 		// HOW DO I CHANGE what's saved in state for sessionList and scheduleList on the page???
 
-		this.updateSessionList();
+		// this.updateSessionList();
 
 		// I need to get raw sessions and raw schedule
 		// THEN loop thru sessions and add userID to update state.sessionList
