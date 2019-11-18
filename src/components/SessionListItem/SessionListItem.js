@@ -52,7 +52,7 @@ export default class SessionListItem extends Component {
 
 						<div className="description">
 							<span>
-								<Link to={`/sessions/${session.code}`}>
+								<Link to={`/session/${session.id}`}>
 									<span className="simple title">{session.name}</span>
 								</Link>
 							</span>
@@ -75,14 +75,14 @@ export default class SessionListItem extends Component {
 							aria-expanded="false"
 							aria-label="show-session-details-button"
 						>
-							<FontAwesomeIcon icon="chevron-down" size="3x" />
+							<FontAwesomeIcon icon="chevron-down" size="2x" />
 						</button>
 
 						<button
 							className="btn-add-to-schedule"
 							aria-label="add-session-to-schedule-button"
 						>
-							<FontAwesomeIcon icon="star" size="3x" />
+							<FontAwesomeIcon icon="star" size="2x" />
 						</button>
 					</div>
 				</div>

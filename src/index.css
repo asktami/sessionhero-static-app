@@ -58,7 +58,7 @@ header {
 }
 
 main {
-	margin: 20px;
+	margin: 0 50px;
 }
 
 .search-bar > div {
@@ -103,6 +103,7 @@ select,
 form,
 footer {
 	font-family: 'Coming Soon', cursive;
+	font-size: inherit;
 }
 h3,
 h4,
@@ -147,7 +148,7 @@ small {
 }
 
 form {
-	font-size: 18px;
+	font-size: inherit;
 }
 
 input[type='text'],
@@ -538,6 +539,11 @@ button:focus:before {
 	list-style-type: none;
 }
 
+.comment-form {
+	padding-top: 20px;
+	border-top: 2px solid #6daffe;
+}
+
 .comment-item {
 	border-top: 2px solid #6daffe;
 	margin-bottom: 20px;
@@ -548,8 +554,8 @@ button:focus:before {
 	font-family: 'Coming Soon', cursive;
 	font-size: 16px;
 	background: #fff;
-	padding: 10px;
 	border-radius: 4px;
+	padding-top: 10px;
 }
 
 p.comment-user {
@@ -563,13 +569,13 @@ p.comment-user {
 	background: #fff;
 	line-height: 1.5;
 }
-
-.comment-btns {
+.comment-footer {
 	font-family: 'Roboto', sans-serif;
-	text-align: center;
-	margin: 0;
-	padding-bottom: 20px;
-	background: #fff;
+	align-self: center;
+}
+
+.comment-btns > div {
+	padding-left: 10px;
 }
 
 .btn-save-comment,
@@ -591,12 +597,6 @@ p.comment-user {
 .btn-delete-comment:hover {
 	background-color: #9e6c00;
 	color: #fff;
-}
-
-.btn-save-comment:focus,
-.btn-edit-comment:focus,
-.btn-delete-comment:focus {
-	color: #000;
 }
 
 /*   RATING STARS FOR RADIO BUTTONS **** */

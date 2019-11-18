@@ -134,7 +134,7 @@
 			"text": "This thing is amazing.",
 			"rating": 4,
 			"date_created": "2019-10-31 23:14:12.649275",
-			"code_session": 1,
+			"id_session": "BUS04",
 			"id_user": 1
 		},
 		{
@@ -142,7 +142,7 @@
 			"text": "Put a bird on it!",
 			"rating": 4,
 			"date_created": "2019-10-31 23:14:12.649275",
-			"code_session": 1,
+			"id_session": "BUS04",
 			"id_user": 1
 		},
 		{
@@ -150,7 +150,7 @@
 			"text": "All the other reviewers are obviously insane, but this thing is actually pretty amazing.",
 			"rating": 5,
 			"date_created": "2019-10-31 23:14:12.649275",
-			"code_session": 1,
+			"id_session": "BUS04",
 			"id_user": 2
 		},
 		{
@@ -158,7 +158,7 @@
 			"text": "When life gives you lemons, trade them for this thing.",
 			"rating": 4,
 			"date_created": "2019-10-31 23:14:12.649275",
-			"code_session": 1,
+			"id_session": "BUS04",
 			"id_user": 2
 		}
 	],

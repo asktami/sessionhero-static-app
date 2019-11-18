@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { SessionListProvider } from './contexts/SessionListContext';
+import { AppProvider } from './contexts/AppContext';
 import { SessionProvider } from './contexts/SessionContext';
 import App from './components/App/App';
 import './index.css';
@@ -29,12 +29,12 @@ to use FontAwesome icons
 */
 
 ReactDOM.render(
-	<BrowserRouter>
-		<SessionListProvider>
+	<BrowserRouter basename={process.env.PUBLIC_URL}>
+		<AppProvider>
 			<SessionProvider>
 				<App />
 			</SessionProvider>
-		</SessionListProvider>
+		</AppProvider>
 	</BrowserRouter>,
 	document.getElementById('root')
 );

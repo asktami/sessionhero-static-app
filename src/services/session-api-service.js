@@ -34,7 +34,7 @@ const SessionApiService = {
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
-	postComment(sessionId, comment, rating) {
+	postComment(sessionId, text, rating) {
 		return fetch(`${config.API_ENDPOINT}/comments`, {
 			method: 'POST',
 			headers: {
@@ -44,7 +44,7 @@ const SessionApiService = {
 			body: JSON.stringify({
 				session_id: sessionId,
 				rating,
-				comment
+				text
 			})
 		}).then(res =>
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()

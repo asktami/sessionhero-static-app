@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SessionContext from '../../contexts/SessionContext';
 import SessionApiService from '../../services/session-api-service';
-import { Pipe, Section } from '../../components/Utils/Utils';
 
 import SessionListItem from '../../components/SessionListItem/SessionListItem';
 
@@ -18,12 +17,12 @@ export default class SessionPage extends Component {
 	static contextType = SessionContext;
 
 	componentDidMount() {
-		const { SessionId } = this.props.match.params;
+		const { sessionId } = this.props.match.params;
 		this.context.clearError();
-		SessionApiService.getSession(SessionId)
+		SessionApiService.getSession(sessionId)
 			.then(this.context.setSession)
 			.catch(this.context.setError);
-		SessionApiService.getSessionComments(SessionId)
+		SessionApiService.getSessionComments(sessionId)
 			.then(this.context.setComments)
 			.catch(this.context.setError);
 	}
@@ -34,9 +33,11 @@ export default class SessionPage extends Component {
 
 	renderSession() {
 		const { session, comments } = this.context;
+
+		console.log(comments);
+
 		return (
 			<>
-				<h2>{session.name}</h2>
 				<SessionListItem session={session} />
 				<SessionComments comments={comments} />
 				<CommentForm />
@@ -59,28 +60,43 @@ export default class SessionPage extends Component {
 		} else {
 			content = this.renderSession();
 		}
-		return { content };
+		return <section>{content}</section>;
 	}
 }
 
 function SessionComments({ comments = [] }) {
 	return (
-		<ul className="SessionPage__review-list">
+		<ul className="comment-list">
 			{comments.map(comment => (
-				<li key={comment.id} className="SessionPage__review">
-					<p className="SessionPage__review-text">
-						<FontAwesomeIcon
-							size="lg"
-							icon="quote-left"
-							className="SessionPage__review-icon blue"
-						/>
+				<li key={comment.id} className="comment-item">
+					<div className="comment-text">
 						{comment.text}
-					</p>
-					<p className="SessionPage__review-user">
-						<SessionStarRating rating={comment.rating} />
-						<Pipe />
-						{'did-not-find comment.user.full_name'}
-					</p>
+						<br />
+
+						<div className="flex-row comment-footer ">
+							<div>
+								{comment.rating}
+								<br />
+								<SessionStarRating rating={comment.rating} />
+								<br />
+								<span className="comment-user sponsor">
+									LoggedIn UserFirstLast
+								</span>
+							</div>
+							<div className="flex-row comment-btns">
+								<div>
+									<button className="btn-edit-comment" type="submit">
+										Edit
+									</button>
+								</div>
+								<div>
+									<button className="btn-delete-comment" type="submit">
+										Delete
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</li>
 			))}
 		</ul>

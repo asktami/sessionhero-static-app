@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const SessionListContext = React.createContext({
+const AppContext = React.createContext({
 	sessionList: [],
 	scheduleList: [],
 	error: null,
@@ -9,9 +9,9 @@ const SessionListContext = React.createContext({
 	setSessionList: () => {},
 	setScheduleList: () => {}
 });
-export default SessionListContext;
+export default AppContext;
 
-export class SessionListProvider extends Component {
+export class AppProvider extends Component {
 	state = {
 		sessionList: [],
 		scheduleList: [],
@@ -46,9 +46,9 @@ export class SessionListProvider extends Component {
 			setScheduleList: this.setScheduleList
 		};
 		return (
-			<SessionListContext.Provider value={value}>
+			<AppContext.Provider value={value}>
 				{this.props.children}
-			</SessionListContext.Provider>
+			</AppContext.Provider>
 		);
 	}
 }

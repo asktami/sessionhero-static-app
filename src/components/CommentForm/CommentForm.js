@@ -22,37 +22,40 @@ export default class CommentForm extends Component {
 
 	render() {
 		return (
-			<form className="CommentForm" onSubmit={this.handleSubmit}>
-				<div className="text">
-					<Textarea
-						required
-						aria-label="Type a comment..."
-						name="text"
-						id="text"
-						cols="30"
-						rows="3"
-						placeholder="Type a comment.."
-					></Textarea>
-				</div>
+			<section>
+				<form className="comment-form" onSubmit={this.handleSubmit}>
+					<div className="text">
+						<Textarea
+							required
+							aria-label="Type a comment..."
+							name="text"
+							id="text"
+							placeholder="Type a comment.."
+						></Textarea>
+					</div>
 
-				<div className="select">
-					<label htmlFor="rating">Rate this session!</label>
 					<select
 						required
-						aria-label="Rate this session!"
+						aria-label="Rate this session"
+						type="number"
 						name="rating"
 						id="rating"
 					>
+						<option value="">Rate this session</option>
 						<option value="1">1 Star</option>
 						<option value="2">2 Stars</option>
 						<option value="3">3 Stars</option>
 						<option value="4">4 Stars</option>
 						<option value="5">5 Stars</option>
 					</select>
-				</div>
+					<br />
+					<br />
 
-				<Button type="submit">Post comment</Button>
-			</form>
+					<Button className="btn-save-comment" type="submit">
+						Save
+					</Button>
+				</form>
+			</section>
 		);
 	}
 }

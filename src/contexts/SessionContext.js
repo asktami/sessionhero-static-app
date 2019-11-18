@@ -34,8 +34,8 @@ export class SessionProvider extends Component {
 		this.setState({ error: null });
 	};
 
-	setSession = Session => {
-		this.setState({ Session });
+	setSession = session => {
+		this.setState({ session });
 	};
 
 	setComments = comments => {
