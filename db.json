@@ -163,18 +163,18 @@
 		}
 	],
 	"users": [{
+		{
 			"id": 1,
-			"user_name": "dunder",
-			"password": "$2a$12$ijvWD84EtJhC8AKFjT1cB.Bcm7T28M7/9pPs6E03Yl8z5rcd6Ld5.",
-			"full_name": "Dunder Mifflin",
+			"user_name": "demoUser",
+			"password": "$2a$12$otAlCQST//.2BWkPLhDC4.dCTapcHh6iC7.LLIeRRtAgP/MR.B5CK",
+			"full_name": "Demo User",
 			"date_created": "2019-10-31 23:14:12.649275",
 			"date_modified": ""
 		},
-		{
 			"id": 2,
-			"user_name": "demo",
+			"user_name": "dunder",
 			"password": "$2a$12$ijvWD84EtJhC8AKFjT1cB.Bcm7T28M7/9pPs6E03Yl8z5rcd6Ld5.",
-			"full_name": "Demo User2",
+			"full_name": "Dunder Mifflin",
 			"date_created": "2019-10-31 23:14:12.649275",
 			"date_modified": ""
 		}
