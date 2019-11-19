@@ -13,6 +13,7 @@ class SearchBar extends Component {
 		sessionName: null
 	};
 
+	// TBD need to get sesssion name from queryString IF queryString has sesssion name
 	componentDidMount() {
 		this.setState({
 			sessionName: queryString.parse(this.props.location.search).session
@@ -32,6 +33,7 @@ class SearchBar extends Component {
 	}
 
 	renderSearchBar() {
+		console.log(this.state.sessionName);
 		return (
 			<div className="search-bar">
 				<div>
