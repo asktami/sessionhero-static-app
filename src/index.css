@@ -84,7 +84,7 @@ main {
 }
 /* Vertically center header content */
 @media only screen and (max-width: 500px) {
-	.hero {
+	.heroX {
 		height: 60vh;
 	}
 
