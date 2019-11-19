@@ -1,6 +1,6 @@
 {
 	"sessions": [
-	{
+		{
 			"track": "Business",
 			"date": "8/6/2019",
 			"time_start": "14:45:00",
@@ -129,7 +129,8 @@
 			"speaker": "Brandon Hayes (Kalos Consulting Inc.)"
 		}
 	],
-	"comments": [{
+	"comments": [
+		{
 			"id": 1,
 			"text": "This thing is amazing.",
 			"rating": 4,
@@ -162,20 +163,20 @@
 			"userId": 2
 		}
 	],
-	"users": [{
-	
+	"users": [
+		{
 			"id": 1,
-			"user_name": "demoUser",
+			"username": "demoUser",
 			"password": "$2a$12$otAlCQST//.2BWkPLhDC4.dCTapcHh6iC7.LLIeRRtAgP/MR.B5CK",
-			"full_name": "Demo User",
+			"fullname": "Demo User",
 			"date_created": "2019-10-31 23:14:12.649275",
 			"date_modified": ""
 		},
 		{
 			"id": 2,
-			"user_name": "dunder",
+			"username": "dunder",
 			"password": "$2a$12$ijvWD84EtJhC8AKFjT1cB.Bcm7T28M7/9pPs6E03Yl8z5rcd6Ld5.",
-			"full_name": "Dunder Mifflin",
+			"fullname": "Dunder Mifflin",
 			"date_created": "2019-10-31 23:14:12.649275",
 			"date_modified": ""
 		}
@@ -184,17 +185,17 @@
 		{
 			"id": 1,
 			"sessionId": "BUS04",
-			"userId" : 1
+			"userId": 1
 		},
 		{
 			"id": 2,
 			"sessionId": "CRE12",
-			"userId" : 1
+			"userId": 1
 		},
 		{
 			"id": 3,
 			"sessionId": "TRA08",
-			"userId" : 1
+			"userId": 1
 		}
 	]
 }

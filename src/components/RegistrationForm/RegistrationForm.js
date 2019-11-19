@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Input, Required } from '../Utils/Utils';
+import { Required } from '../Utils/Utils';
 import AuthApiService from '../../services/auth-api-service';
 
 export default class RegistrationForm extends Component {
@@ -11,22 +11,22 @@ export default class RegistrationForm extends Component {
 
 	handleSubmit = ev => {
 		ev.preventDefault();
-		const { full_name, nick_name, user_name, password } = ev.target;
+		const { fullname, nick_name, username, password } = ev.target;
 
 		// console.log('registration form submitted');
-		// console.log({ full_name, nick_name, user_name, password });
+		// console.log({ fullname, nick_name, username, password });
 
 		this.setState({ error: null });
 		AuthApiService.postUser({
-			user_name: user_name.value,
+			username: username.value,
 			password: password.value,
-			full_name: full_name.value,
+			fullname: fullname.value,
 			nickname: nick_name.value
 		})
 			.then(user => {
-				full_name.value = '';
+				fullname.value = '';
 				nick_name.value = '';
-				user_name.value = '';
+				username.value = '';
 				password.value = '';
 				this.props.onRegistrationSuccess();
 			})
@@ -40,49 +40,30 @@ export default class RegistrationForm extends Component {
 		return (
 			<form className="RegistrationForm" onSubmit={this.handleSubmit}>
 				<div role="alert">{error && <p className="error">{error}</p>}</div>
-				<div className="full_name">
-					<label htmlFor="RegistrationForm__full_name">
-						Full name <Required />
+				<div>
+					<label htmlFor="fullname">
+						Fullname <Required />
 					</label>
-					<Input
-						name="full_name"
-						type="text"
-						required
-						id="RegistrationForm__full_name"
-					></Input>
+					<input name="fullname" type="text" required id="fullname" />
 				</div>
-				<div className="user_name">
-					<label htmlFor="RegistrationForm__user_name">
-						User name <Required />
+				<div>
+					<label htmlFor="username">
+						Username <Required />
 					</label>
-					<Input
-						name="user_name"
-						type="text"
-						required
-						id="RegistrationForm__user_name"
-					></Input>
+					<input name="username" type="text" required id="username" />
 				</div>
 				<div className="password">
-					<label htmlFor="RegistrationForm__password">
+					<label htmlFor="password">
 						Password <Required />
 					</label>
-					<Input
+					<input
 						name="password"
 						type="password"
 						required
 						id="RegistrationForm__password"
-					></Input>
+					/>
 				</div>
-				<div className="nick_name">
-					<label htmlFor="RegistrationForm__nick_name">Nickname</label>
-					<Input
-						name="nick_name"
-						type="text"
-						required
-						id="RegistrationForm__nick_name"
-					></Input>
-				</div>
-				<Button type="submit">Register</Button>
+				<button className="btn-basic">Register</button>
 			</form>
 		);
 	}

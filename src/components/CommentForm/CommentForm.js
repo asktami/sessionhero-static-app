@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import SessionContext from '../../contexts/SessionContext';
 import SessionApiService from '../../services/session-api-service';
-import { Button, Textarea } from '../Utils/Utils';
 import './CommentForm.css';
 
 export default class CommentForm extends Component {
@@ -12,7 +11,7 @@ export default class CommentForm extends Component {
 		const { session } = this.context;
 		const { text, rating } = ev.target;
 
-		SessionApiService.postComment(session.id, text.value, Number(rating.value))
+		SessionApiService.addComment(session.id, text.value, Number(rating.value))
 			.then(this.context.addComment)
 			.then(() => {
 				text.value = '';
@@ -25,13 +24,13 @@ export default class CommentForm extends Component {
 			<section>
 				<form className="comment-form" onSubmit={this.handleSubmit}>
 					<div className="text">
-						<Textarea
+						<textarea
 							required
 							aria-label="Type a comment..."
 							name="text"
 							id="text"
 							placeholder="Type a comment.."
-						></Textarea>
+						/>
 					</div>
 
 					<select
@@ -51,9 +50,9 @@ export default class CommentForm extends Component {
 					<br />
 					<br />
 
-					<Button className="btn-save-comment" type="submit">
+					<button className="btn-save-comment" type="submit">
 						Save
-					</Button>
+					</button>
 				</form>
 			</section>
 		);

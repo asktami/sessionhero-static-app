@@ -62,18 +62,23 @@ const SessionApiService = {
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
-	editComment(commentId) {
-		return fetch(`${config.API_ENDPOINT}/comments/${commentId}`, {
+	editComment(comment) {
+		return fetch(`${config.API_ENDPOINT}/comments/${comment.id}`, {
 			method: 'PATCH',
 			headers: {
 				'content-type': 'application/json',
 				authorization: `bearer ${TokenService.getAuthToken()}`
-			}
+			},
+			body: JSON.stringify({
+				comment
+			})
 		}).then(res =>
-			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+			!res.ok
+				? res.json().then(e => Promise.reject(e))
+				: res.json().then(json => console.log(json))
 		);
 	},
-	postComment(sessionId, text, rating) {
+	addComment(sessionId, text, rating) {
 		return fetch(`${config.API_ENDPOINT}/comments`, {
 			method: 'POST',
 			headers: {
@@ -86,7 +91,9 @@ const SessionApiService = {
 				text
 			})
 		}).then(res =>
-			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+			!res.ok
+				? res.json().then(e => Promise.reject(e))
+				: res.json().then(json => console.log(json))
 		);
 	}
 };

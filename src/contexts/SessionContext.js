@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 
-export const nullSession = {
-	author: {},
-	tags: []
-};
-
 const SessionContext = React.createContext({
-	session: nullSession,
+	session: [],
 	comments: [],
 	error: null,
 	setError: () => {},
 	clearError: () => {},
 	setSession: () => {},
-	clearSession: () => {},
 	setComments: () => {},
+	clearSession: () => {},
 	addComment: () => {},
+	editComment: () => {},
 	deleteComment: () => {}
 });
 
@@ -22,7 +18,7 @@ export default SessionContext;
 
 export class SessionProvider extends Component {
 	state = {
-		session: nullSession,
+		session: [],
 		error: null,
 		comments: []
 	};
@@ -45,7 +41,7 @@ export class SessionProvider extends Component {
 	};
 
 	clearSession = () => {
-		this.setSession(nullSession);
+		this.setSession([]);
 		this.setComments([]);
 	};
 

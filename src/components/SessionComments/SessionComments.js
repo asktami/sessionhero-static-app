@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import SessionContext from '../../contexts/SessionContext';
 import { Link } from 'react-router-dom';
-import { Button } from '../Utils/Utils';
 import { SessionStarRating } from '../../components/SessionStarRating/SessionStarRating';
 
 export default class SessionContents extends Component {
 	static contextType = SessionContext;
 
 	render() {
-		const { comments } = this.props;
-		const { deleteComment } = this.context;
-
-		console.log('comments = ', comments);
+		const { comments, deleteComment } = this.context;
 
 		return (
 			<ul className="comment-list">
@@ -34,7 +30,7 @@ export default class SessionContents extends Component {
 								<div className="flex-row comment-btns">
 									<div>
 										<Link to={`/comments/${comment.id}`}>
-											<Button className="btn-edit-comment">Edit</Button>
+											<button className="btn-edit-comment">Edit</button>
 										</Link>
 									</div>
 									<div>

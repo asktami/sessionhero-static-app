@@ -57,7 +57,7 @@ header {
 	padding: 40px 20px 0px 20px;
 }
 
-.search-header {
+.search-section {
 	margin: 0;
 	padding: 0;
 }
@@ -91,7 +91,7 @@ main {
 		font-size: 28px;
 	}
 	header,
-	.search-header h2 {
+	.search-section h2 {
 		font-size: 20px;
 	}
 }
@@ -161,17 +161,44 @@ small {
 	font-size: 80%;
 }
 
+.required {
+	color: #ca1551;
+	font-family: Arial;
+	font-weight: bold;
+}
+
 form {
 	font-size: inherit;
 }
 
-input[type='text'],
-select,
-textarea {
+.pipe {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+select {
 	color: #666;
 	height: 32px;
 	border: 1px solid #ddd;
 	padding: 6px;
+}
+
+input,
+textarea {
+	color: #666;
+	border: 1px solid #ddd;
+	display: block;
+	font-size: 1.1em;
+	margin-bottom: 10px;
+	padding: 10px;
+	text-align: left;
+	width: 100%;
+	border-radius: 4px;
+}
+
+input::placeholder,
+textarea::placeholder {
+	color: #ccc;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
@@ -198,12 +225,6 @@ select::-moz-focus-inner {
 		height: 40px;
 		line-height: 40px;
 	}
-}
-
-textarea {
-	overflow-y: scroll;
-	min-height: 10vh;
-	width: 400px;
 }
 
 fieldset {
@@ -242,6 +263,15 @@ far fa-times-circle = delete-from-schedule OUTLINE = f057
 /* vertical space between buttons */
 .btn-expand-item + .btn-add-to-schedule {
 	margin-top: 30px;
+}
+
+.btn-basic {
+	order: 1px solid #aaa;
+	background-color: #eee;
+	font-size: 1.1em;
+	border-radius: 4px;
+	padding: 8px 12px;
+	font-weight: bold;
 }
 
 button,

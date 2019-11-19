@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../../index.css';
 
-// to get props in Header
+// to get props in SearchBar
 import { withRouter } from 'react-router';
 
 class SearchBar extends Component {
@@ -85,7 +85,7 @@ class SearchBar extends Component {
 
 	render() {
 		return (
-			<section className="search-header">
+			<section className="search-section">
 				{this.renderMessage()}
 
 				{this.props.location.pathname === '/' ||

@@ -1,9 +1,17 @@
 import React from 'react';
-import './Utils.css';
 
 export function Pipe() {
 	return <span className="pipe">{' | '}</span>;
 }
+
+export function Required({ className, ...props }) {
+	return (
+		<span className={['required', className].join(' ')} {...props}>
+			&#42;
+		</span>
+	);
+}
+
 // to convert session.track to color
 export function getColor(str) {
 	return str
@@ -32,24 +40,4 @@ export function getDayNumber(dateStr, locale = 'en-US') {
 export function getDayName(dateStr, locale = 'en-US') {
 	var date = new Date(dateStr);
 	return date.toLocaleDateString(locale, { weekday: 'short' });
-}
-
-export function Button({ className, ...props }) {
-	return <button className={['Button', className].join(' ')} {...props} />;
-}
-
-export function Textarea({ className, ...props }) {
-	return <textarea className={['Textarea', className].join(' ')} {...props} />;
-}
-
-export function Input({ className, ...props }) {
-	return <input className={['Input', className].join(' ')} {...props} />;
-}
-
-export function Required({ className, ...props }) {
-	return (
-		<span className={['Required', className].join(' ')} {...props}>
-			&#42;
-		</span>
-	);
 }

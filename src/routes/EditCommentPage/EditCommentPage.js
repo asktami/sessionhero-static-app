@@ -1,14 +1,11 @@
 import React from 'react';
 import config from '../../config';
-
-import AppContext from '../../contexts/AppContext';
+import SessionContext from '../../contexts/SessionContext';
 import SessionApiService from '../../services/session-api-service';
-
 import ValidationError from '../../ValidationError';
-import { Button, Textarea } from '../../components/Utils/Utils';
 
 class EditComment extends React.Component {
-	static contextType = AppContext;
+	static contextType = SessionContext;
 
 	state = {
 		apiError: null,
@@ -31,7 +28,6 @@ class EditComment extends React.Component {
 		...
 	*/
 
-	// get comment to be updated
 	componentDidMount() {
 		const { commentId } = this.props.match.params;
 		fetch(config.API_ENDPOINT + `/comments/${commentId}`, {
@@ -141,9 +137,6 @@ class EditComment extends React.Component {
 
 	render() {
 		const { errors, text, rating } = this.state;
-
-		console.log('editCommentPage error = ', this.state.error);
-
 		if (this.state.apiError) {
 			return <p className="error">{this.state.apiErrors}</p>;
 		}
@@ -153,7 +146,7 @@ class EditComment extends React.Component {
 				<fieldset>
 					<legend></legend>
 					<label htmlFor="text">Comment</label>
-					<Textarea
+					<textarea
 						id="text"
 						name="text"
 						placeholder="Type a comment.."
@@ -164,7 +157,7 @@ class EditComment extends React.Component {
 						aria-invalid="true"
 						value={text}
 						onChange={this.handleChange}
-					></Textarea>
+					/>
 					{errors.text.length > 0 && (
 						<ValidationError id={'textError'} message={errors.text} />
 					)}
@@ -190,13 +183,13 @@ class EditComment extends React.Component {
 					<button className="btn-cancel" onClick={this.handleClickCancel}>
 						Cancel
 					</button>{' '}
-					<Button
+					<button
 						className="btn-save-comment"
 						disabled={this.state.formValid === false}
 						type="submit"
 					>
 						Save
-					</Button>
+					</button>
 				</fieldset>
 
 				{this.state.errorCount !== null ? (

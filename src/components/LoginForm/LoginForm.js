@@ -13,18 +13,18 @@ export default class LoginForm extends Component {
 
 	handleSubmitBasicAuth = ev => {
 		ev.preventDefault();
-		const { user_name, password } = ev.target;
+		const { username, password } = ev.target;
 
 		// console.log('login form submitted');
-		// console.log('user_name: ', user_name.value);
+		// console.log('username: ', username.value);
 		// console.log('password: ', password.value);
 
 		// create the login auth token and save it in localStorage
 		TokenService.saveAuthToken(
-			TokenService.makeBasicAuthToken(user_name.value, password.value)
+			TokenService.makeBasicAuthToken(username.value, password.value)
 		);
 
-		user_name.value = '';
+		username.value = '';
 		password.value = '';
 		this.props.onLoginSuccess();
 	};
@@ -32,14 +32,14 @@ export default class LoginForm extends Component {
 	handleSubmitJwtAuth = ev => {
 		ev.preventDefault();
 		this.setState({ error: null });
-		const { user_name, password } = ev.target;
+		const { username, password } = ev.target;
 
 		AuthApiService.postLogin({
-			user_name: user_name.value,
+			username: username.value,
 			password: password.value
 		})
 			.then(res => {
-				user_name.value = '';
+				username.value = '';
 				password.value = '';
 				TokenService.saveAuthToken(res.authToken);
 				this.props.onLoginSuccess();
@@ -52,22 +52,17 @@ export default class LoginForm extends Component {
 	render() {
 		const { error } = this.state;
 		return (
-			<form className="LoginForm" onSubmit={this.handleSubmitJwtAuth}>
+			<form onSubmit={this.handleSubmitJwtAuth}>
 				<div role="alert">{error && <p className="error">{error}</p>}</div>
-				<div className="user_name">
-					<label htmlFor="LoginForm__user_name">User name</label>
-					<Input required name="user_name" id="LoginForm__user_name"></Input>
+				<div>
+					<label htmlFor="username">User name</label>
+					<input type="text" required name="username" id="username" />
 				</div>
 				<div className="password">
-					<label htmlFor="LoginForm__password">Password</label>
-					<Input
-						required
-						name="password"
-						type="password"
-						id="LoginForm__password"
-					></Input>
+					<label htmlFor="password">Password</label>
+					<input required name="password" type="password" id="password" />
 				</div>
-				<Button type="submit">Login</Button>
+				<button className="btn-basic">Login</button>
 			</form>
 		);
 	}
