@@ -6,6 +6,8 @@ import SessionListItem from '../../components/SessionListItem/SessionListItem';
 import SessionComments from '../../components/SessionComments/SessionComments';
 import CommentForm from '../../components/CommentForm/CommentForm';
 
+import EditCommentPage from '../EditCommentPage/EditCommentPage';
+
 import './SessionPage.css';
 
 export default class SessionPage extends Component {

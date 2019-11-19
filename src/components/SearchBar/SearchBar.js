@@ -2,15 +2,30 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../../index.css';
 
+// to get query string for session.name on EditCommentPage
+import queryString from 'query-string';
+
 // to get props in SearchBar
 import { withRouter } from 'react-router';
 
 class SearchBar extends Component {
+	state = {
+		sessionName: null
+	};
+
+	componentDidMount() {
+		this.setState({
+			sessionName: queryString.parse(this.props.location.search).session
+		});
+	}
+
 	renderMessage() {
 		return this.props.location.pathname === '/' ? (
 			<h2>View session details to plan your conference experience</h2>
 		) : this.props.location.pathname === '/schedule' ? (
 			<h2>Sessions in your schedule</h2>
+		) : this.props.location.pathname.includes('/comments') ? (
+			<h2>{this.state.sessionName} </h2>
 		) : (
 			<p>&nbsp;</p>
 		);
@@ -84,12 +99,14 @@ class SearchBar extends Component {
 	}
 
 	render() {
+		console.log(this.props);
+		console.log(this.props.location.search);
+
 		return (
 			<section className="search-section">
 				{this.renderMessage()}
 
-				{this.props.location.pathname === '/' ||
-				this.props.location.pathname === '/schedule'
+				{['/', '/schedule'].includes(this.props.location.pathname)
 					? this.renderSearchBar()
 					: null}
 			</section>

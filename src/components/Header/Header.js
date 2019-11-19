@@ -8,25 +8,30 @@ import { withRouter } from 'react-router';
 
 class Header extends Component {
 	renderMessage() {
-		return this.props.location.pathname === '/' ? (
-			<>
-				<p>
-					Search for conference sessions, add conference sessions to your
-					schedule, comment on sessions, and see comments made by others.
-				</p>
+		switch (this.props.location.pathname) {
+			case '/':
+				return (
+					<>
+						<p>
+							Search for conference sessions, add conference sessions to your
+							schedule, comment on sessions, and see comments made by others.
+						</p>
 
-				<p>
-					You need to register to add conference sessions to your schedule and
-					comment on sessions.
-				</p>
+						<p>
+							You need to register to add conference sessions to your schedule
+							and comment on sessions.
+						</p>
 
-				<p>
-					Demo Username: demoUser
-					<br />
-					Demo Password: demoUser123*
-				</p>
-			</>
-		) : null;
+						<p>
+							Demo Username: demoUser
+							<br />
+							Demo Password: demoUser123*
+						</p>
+					</>
+				);
+			default:
+				return null;
+		}
 	}
 	render() {
 		return (

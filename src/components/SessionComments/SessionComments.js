@@ -7,8 +7,7 @@ export default class SessionContents extends Component {
 	static contextType = SessionContext;
 
 	render() {
-		const { comments, deleteComment } = this.context;
-		console.log('sessionComments comments = ', comments);
+		const { session, comments, deleteComment } = this.context;
 
 		return (
 			<ul className="comment-list">
@@ -30,7 +29,9 @@ export default class SessionContents extends Component {
 								</div>
 								<div className="flex-row comment-btns">
 									<div>
-										<Link to={`/comments/${comment.id}`}>
+										<Link
+											to={`/comments/${comment.id}?session=${session.name}`}
+										>
 											<button className="btn-edit-comment">Edit</button>
 										</Link>
 									</div>

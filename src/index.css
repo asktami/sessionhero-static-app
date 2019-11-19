@@ -166,7 +166,8 @@ small {
 	font-size: 80%;
 }
 
-.required {
+.required,
+.error {
 	color: #ca1551;
 	font-family: Arial;
 	font-weight: bold;

@@ -91,9 +91,7 @@ const SessionApiService = {
 				text
 			})
 		}).then(res =>
-			!res.ok
-				? res.json().then(e => Promise.reject(e))
-				: res.json().then(json => console.log(json))
+			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	}
 };
