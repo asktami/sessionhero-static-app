@@ -23,7 +23,8 @@ export default SessionContext;
 export class SessionProvider extends Component {
 	state = {
 		session: nullSession,
-		error: null
+		error: null,
+		comments: []
 	};
 
 	setError = error => {

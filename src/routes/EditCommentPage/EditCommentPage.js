@@ -99,7 +99,7 @@ class EditComment extends React.Component {
 	};
 
 	handleClickCancel = () => {
-		this.props.history.goBack();
+		this.props.history.push(`/sessions/${this.state.sessionId}`);
 	};
 
 	resetFields = newFields => {
@@ -111,19 +111,6 @@ class EditComment extends React.Component {
 		});
 	};
 
-	handleSubmit = ev => {
-		ev.preventDefault();
-		const { session } = this.context;
-		const { text, rating } = ev.target;
-
-		SessionApiService.editComment(session.id, text.value, Number(rating.value))
-			.then(this.context.editComment)
-			.then(() => {
-				text.value = '';
-			})
-			.catch(this.context.setError);
-	};
-
 	handleSubmit = e => {
 		e.preventDefault();
 
@@ -132,7 +119,6 @@ class EditComment extends React.Component {
 
 		// get the form fields to be updated
 		const { commentId } = this.props.match.params;
-		const { text, rating } = e.target;
 
 		const updatedComment = {
 			id: commentId,
@@ -147,60 +133,40 @@ class EditComment extends React.Component {
 			.then(this.context.editComment)
 			.then(() => {
 				this.resetFields(updatedComment);
+				this.context.editComment(updatedComment);
 				this.props.history.goBack();
 			})
 			.catch(this.context.setError);
-
-		// fetch(config.API_ENDPOINT + `/${commentId}`, {
-		// 	method: 'PATCH',
-		// 	body: JSON.stringify(newComment),
-		// 	headers: {
-		// 		'content-type': 'application/json',
-		// 		authorization: `Bearer ${config.API_KEY}`
-		// 	}
-		// })
-		// 	.then(res => {
-		// 		if (!res.ok) return res.json().then(error => Promise.reject(error));
-		// 	})
-		// 	.then(() => {
-		// 		this.resetFields(newComment);
-		// 		this.context.updateComment(newComment);
-
-		// 		// return to SessionPage
-		// 		this.props.history.push(`/sessions/${this.state.sessionId}`);
-		// 	})
-		// 	.catch(error => {
-		// 		console.log(error);
-		// 		this.setState({ apiError: error });
-		// 	});
 	};
 
 	render() {
 		const { errors, text, rating } = this.state;
 
+		console.log('editCommentPage error = ', this.state.error);
+
 		if (this.state.apiError) {
-			return <p className="error">{this.state.apiError}</p>;
+			return <p className="error">{'this.state.apiError'}</p>;
 		}
 
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<fieldset>
 					<legend></legend>
-					<label htmlFor="content">Comment</label>
+					<label htmlFor="text">Comment</label>
 					<Textarea
-						required
-						aria-required="true"
-						aria-describedby="commentError"
-						aria-invalid="true"
-						aria-label="Edit comment..."
 						id="text"
 						name="text"
 						placeholder="Type a comment.."
+						required
+						aria-required="true"
+						aria-describedby="textError"
+						aria-label="Edit comment..."
+						aria-invalid="true"
 						value={text}
 						onChange={this.handleChange}
 					></Textarea>
 					{errors.text.length > 0 && (
-						<ValidationError id={'commentError'} message={errors.text} />
+						<ValidationError id={'textError'} message={errors.text} />
 					)}
 					<label htmlFor="rating">Rating</label>
 					<select
@@ -209,7 +175,6 @@ class EditComment extends React.Component {
 						aria-label="Rating"
 						required
 						aria-required="true"
-						aria-describedby="ratingError"
 						aria-invalid="true"
 						value={rating}
 						onChange={this.handleChange}
@@ -221,9 +186,6 @@ class EditComment extends React.Component {
 							</option>
 						))}
 					</select>
-					{errors.rating.length > 0 && (
-						<ValidationError id={'ratingError'} message={errors.rating} />
-					)}
 					<br />
 					<button className="btn-cancel" onClick={this.handleClickCancel}>
 						Cancel

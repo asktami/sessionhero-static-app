@@ -44,7 +44,7 @@ class App extends Component {
 						<PublicOnlyRoute path={'/register'} component={RegistrationPage} />
 
 						<PrivateRoute
-							path={'/session/:sessionId'}
+							path={'/sessions/:sessionId'}
 							component={SessionPage}
 						/>
 

@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
 import SessionContext from '../../contexts/SessionContext';
-import SessionApiService from '../../services/session-api-service';
-
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from '../Utils/Utils';
 import { SessionStarRating } from '../../components/SessionStarRating/SessionStarRating';
 
 export default class SessionContents extends Component {
-	static defaultProps = {
-		match: { params: {} }
-	};
-
 	static contextType = SessionContext;
 
 	render() {
+		const { comments } = this.props;
 		const { deleteComment } = this.context;
+
+		console.log('comments = ', comments);
 
 		return (
 			<ul className="comment-list">
-				{this.props.comments.map(comment => (
+				{comments.map(comment => (
 					<li key={comment.id} className="comment-item">
 						<div className="comment-text">
 							{comment.text}
