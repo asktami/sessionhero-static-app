@@ -40,7 +40,7 @@ nav {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	padding: 20px;
+	padding: 10px;
 }
 
 header,
@@ -54,13 +54,16 @@ header,
 }
 header {
 	font-size: 20px;
-	padding: 40px 20px 20px 20px;
+	padding: 40px 20px 0px 20px;
 }
 
+.search-header {
+	margin: 0;
+	padding: 0;
+}
 .search-bar {
-	padding: 20px;
+	padding: 10px;
 }
-
 main {
 	margin: 0 50px;
 }
@@ -82,7 +85,14 @@ main {
 /* Vertically center header content */
 @media only screen and (max-width: 500px) {
 	.hero {
-		height: 50vh;
+		height: 60vh;
+	}
+	header h1 {
+		font-size: 28px;
+	}
+	header,
+	.search-header h2 {
+		font-size: 20px;
 	}
 }
 

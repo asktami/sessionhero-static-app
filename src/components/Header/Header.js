@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import TokenService from '../../services/token-service';
 import '../../index.css';
 
 // to get props in Header
@@ -33,7 +34,9 @@ class Header extends Component {
 				<h1>
 					<Link to={`/`}>SessionHero</Link>
 				</h1>
-				{this.renderMessage()}
+
+				{/* check localStorage for login auth */}
+				{TokenService.hasAuthToken() ? null : this.renderMessage()}
 			</header>
 		);
 	}

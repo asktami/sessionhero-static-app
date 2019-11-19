@@ -145,7 +145,7 @@ class EditComment extends React.Component {
 		console.log('editCommentPage error = ', this.state.error);
 
 		if (this.state.apiError) {
-			return <p className="error">{'this.state.apiError'}</p>;
+			return <p className="error">{this.state.apiErrors}</p>;
 		}
 
 		return (

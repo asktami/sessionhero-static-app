@@ -24,7 +24,7 @@ export default class ScheduleListPage extends Component {
 		return (
 			<section>
 				{error ? (
-					<p className="error">There was an error, try again</p>
+					<p className="error">There was an error, try again {error}</p>
 				) : (
 					<ul className="sessions-list">{this.renderSchedule()}</ul>
 				)}

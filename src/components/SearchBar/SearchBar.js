@@ -12,13 +12,13 @@ class SearchBar extends Component {
 		) : this.props.location.pathname === '/schedule' ? (
 			<h2>Sessions in your schedule</h2>
 		) : (
-			<h2>&nbsp;</h2>
+			<p>&nbsp;</p>
 		);
 	}
 
 	renderSearchBar() {
 		return (
-			<section className="search-bar">
+			<div className="search-bar">
 				<div>
 					<Link to="/" id="btn-show-all">
 						Show All
@@ -79,19 +79,20 @@ class SearchBar extends Component {
 						Expand All
 					</Link>
 				</div>
-			</section>
+			</div>
 		);
 	}
 
 	render() {
 		return (
-			<>
+			<section className="search-header">
 				{this.renderMessage()}
+
 				{this.props.location.pathname === '/' ||
 				this.props.location.pathname === '/schedule'
 					? this.renderSearchBar()
 					: null}
-			</>
+			</section>
 		);
 	}
 }

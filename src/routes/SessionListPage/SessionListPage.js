@@ -7,6 +7,9 @@ import './SessionListPage.css';
 export default class SessionListPage extends Component {
 	static contextType = AppContext;
 
+	// add clicked item to session to see if added to schedule or not
+	state = {};
+
 	componentDidMount() {
 		this.context.clearError();
 
