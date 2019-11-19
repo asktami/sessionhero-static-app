@@ -4,7 +4,10 @@ import TokenService from '../../services/token-service';
 import { Pipe } from '../../components/Utils/Utils';
 import '../../index.css';
 
-export default class Header extends Component {
+// to get props in Nav
+import { withRouter } from 'react-router';
+
+class Nav extends Component {
 	handleLogoutClick = () => {
 		TokenService.clearAuthToken();
 	};
@@ -14,6 +17,8 @@ export default class Header extends Component {
 			<nav>
 				<div>
 					<Link to="/schedule">Schedule</Link>
+					<Pipe />
+					<Link to="/">Sessions</Link>
 					<Pipe />
 					<Link onClick={this.handleLogoutClick} to="/">
 						Logout
@@ -52,3 +57,5 @@ export default class Header extends Component {
 		);
 	}
 }
+
+export default withRouter(Nav);

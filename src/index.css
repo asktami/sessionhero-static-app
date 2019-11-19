@@ -50,11 +50,15 @@ header,
 	justify-content: center;
 	align-items: center;
 	align-self: center;
-	padding: 20px;
 	text-align: center;
 }
 header {
 	font-size: 20px;
+	padding: 40px 20px 20px 20px;
+}
+
+.search-bar {
+	padding: 20px;
 }
 
 main {
@@ -78,7 +82,7 @@ main {
 /* Vertically center header content */
 @media only screen and (max-width: 500px) {
 	.hero {
-		height: 100vh;
+		height: 50vh;
 	}
 }
 
@@ -130,7 +134,7 @@ h2 {
 	font-size: 30px;
 	font-weight: 400;
 	text-align: center;
-	padding-top: 20px;
+	padding-top: 40px;
 }
 h3 {
 	color: #444;

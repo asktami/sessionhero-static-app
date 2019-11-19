@@ -8,6 +8,8 @@ import SessionListPage from '../../routes/SessionListPage/SessionListPage';
 import SessionPage from '../../routes/SessionPage/SessionPage';
 import ScheduleListPage from '../../routes/ScheduleListPage/ScheduleListPage';
 
+import EditCommentPage from '../../routes/EditCommentPage/EditCommentPage';
+
 import SearchBar from '../SearchBar/SearchBar';
 
 import LoginPage from '../../routes/LoginPage/LoginPage';
@@ -26,9 +28,8 @@ class App extends Component {
 	render() {
 		return (
 			<>
-				{/* TBD how to get props.location to Header??? */}
 				<Nav />
-				<Header {...this.props} />
+				<Header />
 				<SearchBar />
 
 				<main className="wrapper">
@@ -48,6 +49,11 @@ class App extends Component {
 						/>
 
 						<PrivateRoute path={'/schedule'} component={ScheduleListPage} />
+
+						<PrivateRoute
+							path={'/comments/:commentId'}
+							component={EditCommentPage}
+						/>
 
 						<Route component={NotFoundPage} />
 					</Switch>

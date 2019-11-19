@@ -82,7 +82,11 @@ export default class SessionListItem extends Component {
 							className="btn-add-to-schedule"
 							aria-label="add-session-to-schedule-button"
 						>
-							<FontAwesomeIcon icon="star" size="2x" />
+							{session.userId ? (
+								<FontAwesomeIcon icon="star" size="2x" />
+							) : (
+								<FontAwesomeIcon icon={['far', 'star']} size="2x" />
+							)}
 						</button>
 					</div>
 				</div>

@@ -4,14 +4,18 @@ import TokenService from './token-service';
 const SessionApiService = {
 	getSessions() {
 		return fetch(`${config.API_ENDPOINT}/sessions`, {
-			headers: {}
+			headers: {
+				'content-type': 'application/json'
+			}
 		}).then(res =>
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
 	getSchedule() {
 		return fetch(`${config.API_ENDPOINT}/schedule`, {
-			headers: {}
+			headers: {
+				'content-type': 'application/json'
+			}
 		}).then(res =>
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
@@ -19,6 +23,7 @@ const SessionApiService = {
 	getSession(sessionId) {
 		return fetch(`${config.API_ENDPOINT}/sessions/${sessionId}`, {
 			headers: {
+				'content-type': 'application/json',
 				authorization: `bearer ${TokenService.getAuthToken()}`
 			}
 		}).then(res =>
@@ -28,6 +33,40 @@ const SessionApiService = {
 	getSessionComments(sessionId) {
 		return fetch(`${config.API_ENDPOINT}/sessions/${sessionId}/comments`, {
 			headers: {
+				'content-type': 'application/json',
+				authorization: `bearer ${TokenService.getAuthToken()}`
+			}
+		}).then(res =>
+			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+		);
+	},
+
+	getComment(commentId) {
+		return fetch(`${config.API_ENDPOINT}/comments/${commentId}`, {
+			headers: {
+				'content-type': 'application/json',
+				authorization: `bearer ${TokenService.getAuthToken()}`
+			}
+		}).then(res =>
+			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+		);
+	},
+	deleteComment(commentId) {
+		return fetch(`${config.API_ENDPOINT}/comments/${commentId}`, {
+			method: 'DELETE',
+			headers: {
+				'content-type': 'application/json',
+				authorization: `bearer ${TokenService.getAuthToken()}`
+			}
+		}).then(res =>
+			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+		);
+	},
+	editComment(commentId) {
+		return fetch(`${config.API_ENDPOINT}/comments/${commentId}`, {
+			method: 'PATCH',
+			headers: {
+				'content-type': 'application/json',
 				authorization: `bearer ${TokenService.getAuthToken()}`
 			}
 		}).then(res =>

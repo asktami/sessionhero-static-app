@@ -8,7 +8,7 @@ import { withRouter } from 'react-router';
 
 class Header extends Component {
 	renderMessage() {
-		return (
+		return this.props.location.pathname === '/' ? (
 			<>
 				<p>
 					Search for conference sessions, add conference sessions to your
@@ -26,19 +26,15 @@ class Header extends Component {
 					Demo Password: demoUser123*
 				</p>
 			</>
-		);
+		) : null;
 	}
 	render() {
-		console.log('HEADER props = ', this.props);
-
 		return (
 			<header className="hero">
 				<h1>
 					<Link to={`/`}>SessionHero</Link>
 				</h1>
-
 				{this.renderMessage()}
-				<p>&nbsp;</p>
 			</header>
 		);
 	}

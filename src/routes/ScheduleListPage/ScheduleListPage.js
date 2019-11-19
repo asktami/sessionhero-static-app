@@ -8,9 +8,9 @@ export default class ScheduleListPage extends Component {
 	static contextType = AppContext;
 
 	renderSchedule() {
-		const { sessionList = [], scheduleList = [] } = this.context;
+		const { scheduleList = [] } = this.context;
 
-		return sessionList.map(schedule => (
+		return scheduleList.map(schedule => (
 			<li className="item" key={schedule.id}>
 				<SessionListItem session={schedule} />
 			</li>

@@ -14,7 +14,8 @@ const SessionContext = React.createContext({
 	setSession: () => {},
 	clearSession: () => {},
 	setComments: () => {},
-	addComment: () => {}
+	addComment: () => {},
+	deleteComment: () => {}
 });
 
 export default SessionContext;
@@ -51,6 +52,22 @@ export class SessionProvider extends Component {
 		this.setComments([...this.state.comments, comment]);
 	};
 
+	editComment = updatedComment => {
+		const newComments = this.state.comments.map(comment =>
+			comment.id !== updatedComment.id ? comment : updatedComment
+		);
+
+		this.setComments(newComments);
+	};
+
+	deleteComment = commentId => {
+		const newComments = this.state.comments.filter(
+			comment => comment.id !== commentId
+		);
+
+		this.setComments(newComments);
+	};
+
 	render() {
 		const value = {
 			session: this.state.session,
@@ -61,7 +78,9 @@ export class SessionProvider extends Component {
 			setSession: this.setSession,
 			setComments: this.setComments,
 			clearSession: this.clearSession,
-			addComment: this.addComment
+			addComment: this.addComment,
+			editComment: this.editComment,
+			deleteComment: this.deleteComment
 		};
 		return (
 			<SessionContext.Provider value={value}>

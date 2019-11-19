@@ -15,9 +15,9 @@ export default class LoginForm extends Component {
 		ev.preventDefault();
 		const { user_name, password } = ev.target;
 
-		console.log('login form submitted');
-		console.log('user_name: ', user_name.value);
-		console.log('password: ', password.value);
+		// console.log('login form submitted');
+		// console.log('user_name: ', user_name.value);
+		// console.log('password: ', password.value);
 
 		// create the login auth token and save it in localStorage
 		TokenService.saveAuthToken(
