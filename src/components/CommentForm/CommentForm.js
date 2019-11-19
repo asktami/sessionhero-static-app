@@ -6,10 +6,10 @@ import './CommentForm.css';
 export default class CommentForm extends Component {
 	static contextType = SessionContext;
 
-	handleSubmit = ev => {
-		ev.preventDefault();
+	handleSubmit = e => {
+		e.preventDefault();
 		const { session } = this.context;
-		const { text, rating } = ev.target;
+		const { text, rating } = e.target;
 
 		SessionApiService.addComment(session.id, text.value, Number(rating.value))
 			.then(this.context.addComment)

@@ -8,10 +8,11 @@ export default class SessionContents extends Component {
 
 	render() {
 		const { comments, deleteComment } = this.context;
+		console.log('sessionComments comments = ', comments);
 
 		return (
 			<ul className="comment-list">
-				{comments.map(comment => (
+				{(comments || []).map(comment => (
 					<li key={comment.id} className="comment-item">
 						<div className="comment-text">
 							{comment.text}

@@ -180,6 +180,7 @@ class EditComment extends React.Component {
 						))}
 					</select>
 					<br />
+					<br />
 					<button className="btn-cancel" onClick={this.handleClickCancel}>
 						Cancel
 					</button>{' '}
