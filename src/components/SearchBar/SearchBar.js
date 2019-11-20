@@ -16,11 +16,12 @@ class SearchBar extends Component {
 	// TBD need to get sesssion name from queryString IF queryString has sesssion name
 	componentDidMount() {
 		this.setState({
-			sessionName: queryString.parse(this.props.location.search).session
+			sessionName: queryString.parse(this.props.location.search).session || ''
 		});
 	}
 
 	renderMessage() {
+	let sessionName = this.state.sessionName;
 		return this.props.location.pathname === '/' ? (
 			<h2>View session details to plan your conference experience</h2>
 		) : this.props.location.pathname === '/schedule' ? (
@@ -44,16 +45,16 @@ class SearchBar extends Component {
 				<div>
 					<select id="filter-day" name="filter-day" aria-label="Select by Day">
 						<option value="">Select by Day</option>
-						<option value="monday" data-filter="monday">
+						<option value="mon" data-filter="mon">
 							Monday
 						</option>
-						<option value="tuesday" data-filter="tuesday">
+						<option value="tue" data-filter="tue">
 							Tuesday
 						</option>
-						<option value="wednesday" data-filter="wednesday">
+						<option value="wed" data-filter="wed">
 							Wednesday
 						</option>
-						<option value="thursday" data-filter="thursday">
+						<option value="thu" data-filter="thu">
 							Thursday
 						</option>
 					</select>
