@@ -7,16 +7,39 @@ import './ScheduleListPage.css';
 export default class ScheduleListPage extends Component {
 	static contextType = AppContext;
 
+	componentDidMount() {
+		this.context.clearFilters();
+	}
+
 	renderSchedule() {
-		const { scheduleList = [] } = this.context;
+		const {
+			scheduleList = [],
+			setToggleId,
+			toggleId,
+			expandAll
+		} = this.context;
 
-		console.log('renderSchedule schedule = ', scheduleList);
-
-		return scheduleList.map(schedule => (
-			<li className="item" key={schedule.id}>
-				<SessionListItem session={schedule} />
-			</li>
-		));
+		// apply search filters: filterDay and filterTrack
+		return scheduleList
+			.filter(
+				session =>
+					session.day
+						.toLowerCase()
+						.includes(this.context.filterDay.toLowerCase()) &&
+					session.track
+						.toLowerCase()
+						.includes(this.context.filterTrack.toLowerCase())
+			)
+			.map(session => (
+				<li className="item" key={session.id}>
+					<SessionListItem
+						session={session}
+						setToggleId={setToggleId}
+						toggleId={toggleId}
+						expandAll={expandAll}
+					/>
+				</li>
+			));
 	}
 
 	render() {

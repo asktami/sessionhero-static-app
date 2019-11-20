@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import AppContext from '../../contexts/AppContext';
 import '../../index.css';
 
 // to get query string for session.name on EditCommentPage
@@ -9,41 +10,49 @@ import queryString from 'query-string';
 import { withRouter } from 'react-router';
 
 class SearchBar extends Component {
-	state = {
-		sessionName: null
-	};
-
-	// TBD need to get sesssion name from queryString IF queryString has sesssion name
-	componentDidMount() {
-		this.setState({
-			sessionName: queryString.parse(this.props.location.search).session || ''
-		});
-	}
+	static contextType = AppContext;
 
 	renderMessage() {
-	let sessionName = this.state.sessionName;
+		// get sesssion name from queryString IF queryString has sesssion name
+		let sessionName = '';
+		if (this.props.location.search.includes('session')) {
+			sessionName = queryString.parse(this.props.location.search).session;
+		}
 		return this.props.location.pathname === '/' ? (
 			<h2>View session details to plan your conference experience</h2>
 		) : this.props.location.pathname === '/schedule' ? (
 			<h2>Sessions in your schedule</h2>
 		) : this.props.location.pathname.includes('/comments') ? (
-			<h2>{this.state.sessionName} </h2>
-		) : (
-			<p>&nbsp;</p>
-		);
+			<h2>{sessionName} </h2>
+		) : null;
 	}
 
 	renderSearchBar() {
-		console.log(this.state.sessionName);
 		return (
-			<div className="search-bar">
+			<form className="search-bar">
 				<div>
-					<Link to="/" id="btn-show-all">
-						Show All
-					</Link>
+					{this.props.location.pathname === '/schedule' ? (
+						<Link
+							to="/schedule"
+							id="btn-show-all"
+							onClick={this.context.clearFilters}
+						>
+							Show All
+						</Link>
+					) : (
+						<Link to="/" id="btn-show-all" onClick={this.context.clearFilters}>
+							Show All
+						</Link>
+					)}
 				</div>
 				<div>
-					<select id="filter-day" name="filter-day" aria-label="Select by Day">
+					<select
+						id="filter-day"
+						name="filter-day"
+						aria-label="Select by Day"
+						value={this.context.filterDay}
+						onChange={e => this.context.setFilterDay(e.target.value)}
+					>
 						<option value="">Select by Day</option>
 						<option value="mon" data-filter="mon">
 							Monday
@@ -64,6 +73,8 @@ class SearchBar extends Component {
 						id="filter-track"
 						name="filter-track"
 						aria-label="Select by Track"
+						value={this.context.filterTrack}
+						onChange={e => this.context.setFilterTrack(e.target.value)}
 					>
 						<option value="">Select by Track</option>
 						<option value="training" data-filter="training">
@@ -93,17 +104,23 @@ class SearchBar extends Component {
 					</select>
 				</div>
 				<div>
-					<Link to="/" id="btn-expand-all">
-						Expand All
+					<Link
+						to="/"
+						id="btn-expand-all"
+						onClick={this.context.toggleExpandAll}
+					>
+						{this.context.expandAll ? 'Collapse All' : 'Expand All'}
 					</Link>
 				</div>
-			</div>
+			</form>
 		);
 	}
 
 	render() {
 		console.log(this.props);
 		console.log(this.props.location.search);
+		console.log('filterDay = ', this.context.filterDay);
+		console.log('filterTrack = ', this.context.filterTrack);
 
 		return (
 			<section className="search-section">

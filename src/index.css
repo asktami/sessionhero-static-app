@@ -54,22 +54,20 @@ header,
 }
 header {
 	font-size: 20px;
-	padding: 40px 20px 0px 20px;
+	padding: 20px 20px 0px 20px;
 }
-
 .search-section {
 	margin: 0;
-	padding: 0;
+	padding: 20px 0;
 }
 .search-bar {
+	padding: 0;
+}
+.search-bar > div {
 	padding: 10px;
 }
 main {
-	margin: 0 50px;
-}
-
-.search-bar > div {
-	padding: 10px;
+	margin: 0 30px;
 }
 
 .hero {
@@ -85,7 +83,7 @@ main {
 /* Vertically center header content */
 @media only screen and (max-width: 500px) {
 	.heroX {
-		height: 60vh;
+		height: 100vh; /* fills screen */
 	}
 
 	p {
@@ -93,11 +91,23 @@ main {
 	}
 
 	header h1 {
-		font-size: 28px;
+		font-size: 32px;
 	}
 	header,
 	.search-section h2 {
-		font-size: 20px;
+		font-size: 24px;
+	}
+	.search-section h2 {
+		margin: 0 30px;
+	}
+	.search-bar {
+		padding: 10px 0;
+	}
+	.search-bar > div {
+		padding: 5px;
+	}
+	main {
+		margin: 0 30px;
 	}
 }
 
@@ -121,7 +131,7 @@ input,
 select,
 form,
 footer {
-	font-family: 'Coming Soon', cursive;
+	font-family: 'Coming Soon', 'Roboto', cursive;
 	font-size: inherit;
 }
 h3,
@@ -149,7 +159,6 @@ h2 {
 	font-size: 30px;
 	font-weight: 400;
 	text-align: center;
-	padding-top: 40px;
 }
 h3 {
 	color: #444;
@@ -546,12 +555,22 @@ button:focus:before {
 		justify-content: center;
 		align-items: center;
 	}
+
+	.search-bar {
+		padding: 10px 0 40px 0;
+	}
+	.search-bar > div {
+		padding: 10px;
+	}
+	main {
+		margin: 0 50px;
+	}
+
 	.flex-col-then-row {
 		flex-direction: row;
 		align-items: flex-start;
 		align-self: flex-start;
 	}
-
 	.hide {
 		display: flex;
 	}
@@ -559,7 +578,6 @@ button:focus:before {
 	.flex-item-header-row {
 		display: none;
 	}
-
 	.track:before {
 		content: '■';
 		margin-right: 5px;

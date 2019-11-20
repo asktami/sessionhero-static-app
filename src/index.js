@@ -12,10 +12,11 @@ import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 
 import {
 	faChevronDown,
+	faChevronUp,
 	faStar as fasStar
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(fab, faChevronDown, farStar, fasStar);
+library.add(fab, faChevronDown, faChevronUp, farStar, fasStar);
 
 /*
 to use FontAwesome icons

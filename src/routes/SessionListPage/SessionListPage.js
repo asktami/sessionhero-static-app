@@ -7,11 +7,9 @@ import './SessionListPage.css';
 export default class SessionListPage extends Component {
 	static contextType = AppContext;
 
-	// add clicked item to session to see if added to schedule or not
-	state = {};
-
 	componentDidMount() {
 		this.context.clearError();
+		this.context.clearFilters();
 
 		Promise.all([
 			SessionApiService.getSchedule(),
@@ -52,13 +50,29 @@ export default class SessionListPage extends Component {
 	}
 
 	renderSessions() {
-		const { sessionList = [] } = this.context;
+		const { sessionList = [], setToggleId, toggleId, expandAll } = this.context;
 
-		return sessionList.map(session => (
-			<li className="schedule" key={session.id}>
-				<SessionListItem session={session} />
-			</li>
-		));
+		// apply search filters: filterDay and filterTrack
+		return sessionList
+			.filter(
+				session =>
+					session.day
+						.toLowerCase()
+						.includes(this.context.filterDay.toLowerCase()) &&
+					session.track
+						.toLowerCase()
+						.includes(this.context.filterTrack.toLowerCase())
+			)
+			.map(session => (
+				<li className="item" key={session.id}>
+					<SessionListItem
+						session={session}
+						setToggleId={setToggleId}
+						toggleId={toggleId}
+						expandAll={expandAll}
+					/>
+				</li>
+			));
 	}
 
 	render() {

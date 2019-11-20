@@ -11,7 +11,7 @@ import './SessionListItem.css';
 
 export default class SessionListItem extends Component {
 	render() {
-		const { session } = this.props;
+		const { session, setToggleId, toggleId, expandAll } = this.props;
 
 		return (
 			<>
@@ -70,13 +70,20 @@ export default class SessionListItem extends Component {
 					</div>
 
 					<div className="flex-col">
-						<button
-							className="btn-expand-item"
-							aria-expanded="false"
-							aria-label="show-session-details-button"
-						>
-							<FontAwesomeIcon icon="chevron-down" size="2x" />
-						</button>
+						{!expandAll ? (
+							<button
+								className="btn-expand-item"
+								aria-expanded="false"
+								aria-label="show-session-details-button"
+								onClick={() => setToggleId(session.id)}
+							>
+								{toggleId === session.id ? (
+									<FontAwesomeIcon icon="chevron-up" size="2x" />
+								) : (
+									<FontAwesomeIcon icon="chevron-down" size="2x" />
+								)}
+							</button>
+						) : null}
 
 						<button
 							className="btn-add-to-schedule"
@@ -91,7 +98,12 @@ export default class SessionListItem extends Component {
 					</div>
 				</div>
 
-				<div className="flex-footer-row Xtoggle-content">
+				<div
+					className={
+						'flex-footer-row toggle-content ' +
+						(expandAll || toggleId === session.id ? 'is-visible' : null)
+					}
+				>
 					<div>
 						<p className={'simple ' + getColor(session.track)}>
 							{session.speaker}

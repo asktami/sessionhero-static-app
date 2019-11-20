@@ -7,7 +7,12 @@ const AppContext = React.createContext({
 	setError: () => {},
 	clearError: () => {},
 	setSessionList: () => {},
-	setScheduleList: () => {}
+	setScheduleList: () => {},
+	setFilterDay: () => {},
+	setFilterTrack: () => {},
+	clearFilters: () => {},
+	setToggleId: () => {},
+	toggleExpandAll: () => {}
 });
 export default AppContext;
 
@@ -15,7 +20,11 @@ export class AppProvider extends Component {
 	state = {
 		sessionList: [],
 		scheduleList: [],
-		error: null
+		error: null,
+		filterDay: '',
+		filterTrack: '',
+		toggleId: '',
+		expandAll: false
 	};
 
 	setSessionList = sessionList => {
@@ -35,6 +44,53 @@ export class AppProvider extends Component {
 		this.setState({ error: null });
 	};
 
+	setFilterDay = day => {
+		this.setState({
+			filterDay: day
+		});
+	};
+
+	setFilterTrack = track => {
+		this.setState({
+			filterTrack: track
+		});
+	};
+
+	clearFilters = () => {
+		this.setState({ filterDay: '' });
+		this.setState({ filterTrack: '' });
+	};
+
+	toggleExpandAll = () => {
+		this.setState({
+			toggleId: ''
+		});
+		this.setState({
+			expandAll: !this.state.expandAll
+		});
+	};
+
+	// TBD
+	addToSchedule = () => {};
+
+	// TBD
+	setToggleId = id => {
+		if (this.state.toggleId === id) {
+			this.setState({
+				toggleId: ''
+			});
+		} else {
+			this.setState({
+				toggleId: id
+			});
+		}
+
+		// TBD - does not work - why???
+		// this.setState((prevState, id) => ({
+		// 	toggleId: prevState.toggleId === id ? '' : id
+		// }));
+	};
+
 	render() {
 		const value = {
 			sessionList: this.state.sessionList,
@@ -43,7 +99,16 @@ export class AppProvider extends Component {
 			setError: this.setError,
 			clearError: this.clearError,
 			setSessionList: this.setSessionList,
-			setScheduleList: this.setScheduleList
+			setScheduleList: this.setScheduleList,
+			setFilterDay: this.setFilterDay,
+			setFilterTrack: this.setFilterTrack,
+			filterDay: this.state.filterDay,
+			filterTrack: this.state.filterTrack,
+			clearFilters: this.clearFilters,
+			setToggleId: this.setToggleId,
+			toggleId: this.state.toggleId,
+			toggleExpandAll: this.toggleExpandAll,
+			expandAll: this.state.expandAll
 		};
 		return (
 			<AppContext.Provider value={value}>
