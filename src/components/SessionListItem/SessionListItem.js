@@ -12,6 +12,7 @@ import './SessionListItem.css';
 export default class SessionListItem extends Component {
 	render() {
 		const { session, setToggleId, toggleId, expandAll } = this.props;
+		console.log('sessionListItem props =', this.props.location);
 
 		return (
 			<>
@@ -70,7 +71,7 @@ export default class SessionListItem extends Component {
 					</div>
 
 					<div className="flex-col">
-						{!expandAll ? (
+						{!expandAll && !this.props.pathname.includes('/sessions/') ? (
 							<button
 								className="btn-expand-item"
 								aria-expanded="false"
@@ -85,23 +86,38 @@ export default class SessionListItem extends Component {
 							</button>
 						) : null}
 
-						<button
-							className="btn-add-to-schedule"
-							aria-label="add-session-to-schedule-button"
-						>
-							{session.userId ? (
+						{session.userId ? (
+							<button
+								className="btn-add-to-schedule"
+								aria-label="add-session-to-schedule-button"
+								onClick={() =>
+									this.props.removeFromSchedule(session.scheduleId)
+								}
+							>
 								<FontAwesomeIcon icon="star" size="2x" />
-							) : (
+							</button>
+						) : (
+							<button
+								className="btn-add-to-schedule"
+								aria-label="add-session-to-schedule-button"
+								onClick={() =>
+									this.props.addToSchedule(session.id, session.userId)
+								}
+							>
 								<FontAwesomeIcon icon={['far', 'star']} size="2x" />
-							)}
-						</button>
+							</button>
+						)}
 					</div>
 				</div>
 
 				<div
 					className={
 						'flex-footer-row toggle-content ' +
-						(expandAll || toggleId === session.id ? 'is-visible' : null)
+						(expandAll ||
+						toggleId === session.id ||
+						this.props.pathname.includes('/sessions/')
+							? 'is-visible'
+							: null)
 					}
 				>
 					<div>

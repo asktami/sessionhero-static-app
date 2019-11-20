@@ -71,9 +71,6 @@ export class AppProvider extends Component {
 	};
 
 	// TBD
-	addToSchedule = () => {};
-
-	// TBD
 	setToggleId = id => {
 		if (this.state.toggleId === id) {
 			this.setState({

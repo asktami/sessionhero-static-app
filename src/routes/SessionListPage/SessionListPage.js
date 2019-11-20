@@ -30,6 +30,7 @@ export default class SessionListPage extends Component {
 
 	// TBD update sessionList:
 	// combine sessionList and scheduleList so have login userId in session record
+	// ALSO need schedule.id in the join!
 	// in postgres use joins instead
 	updateSessionList() {
 		const { sessionList = [], scheduleList = [] } = this.context;
@@ -39,6 +40,7 @@ export default class SessionListPage extends Component {
 			scheduleList.forEach(schedule => {
 				if (schedule.sessionId === session.id) {
 					session.userId = schedule.userId;
+					session.scheduleId = schedule.id;
 				}
 			});
 		});
@@ -48,6 +50,21 @@ export default class SessionListPage extends Component {
 
 		this.context.setScheduleList(newScheduleList);
 	}
+
+	addToSchedule = (sessionId, userId) => {
+		console.log('add to schedule');
+
+		SessionApiService.addScheduleItem(sessionId, userId)
+			.then(this.context.setSessionList)
+			.catch(this.context.setError);
+	};
+
+	removeFromSchedule = scheduleId => {
+		console.log('remove from schedule');
+		SessionApiService.deleteScheduleItem(scheduleId)
+			.then(this.context.setScheduleList)
+			.catch(this.context.setError);
+	};
 
 	renderSessions() {
 		const { sessionList = [], setToggleId, toggleId, expandAll } = this.context;
@@ -70,6 +87,9 @@ export default class SessionListPage extends Component {
 						setToggleId={setToggleId}
 						toggleId={toggleId}
 						expandAll={expandAll}
+						pathname={this.props.location.pathname}
+						addToSchedule={this.addToSchedule}
+						removeFromSchedule={this.removeFromSchedule}
 					/>
 				</li>
 			));

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AppContext from '../../contexts/AppContext';
+import SessionApiService from '../../services/session-api-service';
 import SessionListItem from '../../components/SessionListItem/SessionListItem';
 
 import './ScheduleListPage.css';
@@ -10,6 +11,12 @@ export default class ScheduleListPage extends Component {
 	componentDidMount() {
 		this.context.clearFilters();
 	}
+
+	removeFromSchedule = scheduleId => {
+		SessionApiService.deleteScheduleItem(scheduleId)
+			.then(this.context.setScheduleList)
+			.catch(this.context.setError);
+	};
 
 	renderSchedule() {
 		const {
@@ -37,6 +44,7 @@ export default class ScheduleListPage extends Component {
 						setToggleId={setToggleId}
 						toggleId={toggleId}
 						expandAll={expandAll}
+						pathname={this.props.location.pathname}
 					/>
 				</li>
 			));

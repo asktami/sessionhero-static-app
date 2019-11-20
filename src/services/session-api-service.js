@@ -86,10 +86,38 @@ const SessionApiService = {
 				authorization: `bearer ${TokenService.getAuthToken()}`
 			},
 			body: JSON.stringify({
-				session_id: sessionId,
+				sessionId: sessionId,
 				rating,
 				text
 			})
+		}).then(res =>
+			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+		);
+	},
+
+	addScheduleItem(sessionId, userId) {
+		return fetch(`${config.API_ENDPOINT}/schedule`, {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json',
+				authorization: `bearer ${TokenService.getAuthToken()}`
+			},
+			body: JSON.stringify({
+				sessionId: sessionId,
+				userId: userId
+			})
+		}).then(res =>
+			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+		);
+	},
+
+	deleteScheduleItem(scheduleId) {
+		return fetch(`${config.API_ENDPOINT}/schedule/${scheduleId}`, {
+			method: 'DELETE',
+			headers: {
+				'content-type': 'application/json',
+				authorization: `bearer ${TokenService.getAuthToken()}`
+			}
 		}).then(res =>
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);

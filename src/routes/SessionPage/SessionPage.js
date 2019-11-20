@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import SessionContext from '../../contexts/SessionContext';
 import SessionApiService from '../../services/session-api-service';
-
 import SessionListItem from '../../components/SessionListItem/SessionListItem';
 import SessionComments from '../../components/SessionComments/SessionComments';
 import CommentForm from '../../components/CommentForm/CommentForm';
@@ -30,15 +29,37 @@ export default class SessionPage extends Component {
 		console.log(this.context.comments);
 	}
 
+	addToSchedule = (sessionId, userId) => {
+		console.log.logrt('add to schedule');
+
+		SessionApiService.addScheduleItem(sessionId, userId)
+			.then(this.context.setSessionList)
+			.catch(this.context.setError);
+	};
+
+	removeFromSchedule = scheduleId => {
+		console.log('remove from schedule');
+
+		SessionApiService.deleteScheduleItem(scheduleId)
+			.then(this.context.setScheduleList)
+			.catch(this.context.setError);
+	};
+
 	componentWillUnmount() {
 		this.context.clearSession();
 	}
 
 	renderSession() {
-		const { session } = this.context;
+		const { session, setToggleId, toggleId, expandAll } = this.context;
 		return (
 			<>
-				<SessionListItem session={session} />
+				<SessionListItem
+					session={session}
+					setToggleId={setToggleId}
+					toggleId={toggleId}
+					expandAll={expandAll}
+					pathname={this.props.location.pathname}
+				/>
 				<SessionComments />
 				<CommentForm />
 			</>
