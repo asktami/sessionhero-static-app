@@ -60,8 +60,8 @@ header {
 	margin: 0;
 	padding: 20px 0;
 }
-.search-bar {
-	padding: 0;
+form.search-bar {
+	padding-top: 20px;
 }
 .search-bar > div {
 	padding: 10px;
@@ -99,9 +99,6 @@ main {
 	}
 	.search-section h2 {
 		margin: 0 30px;
-	}
-	.search-bar {
-		padding: 10px 0;
 	}
 	.search-bar > div {
 		padding: 5px;
@@ -555,17 +552,12 @@ button:focus:before {
 		justify-content: center;
 		align-items: center;
 	}
-
-	.search-bar {
-		padding: 10px 0 40px 0;
-	}
 	.search-bar > div {
 		padding: 10px;
 	}
 	main {
 		margin: 0 50px;
 	}
-
 	.flex-col-then-row {
 		flex-direction: row;
 		align-items: flex-start;
@@ -709,4 +701,9 @@ label.star:before {
 	content: '\f006';
 	font-family: FontAwesome;
 	font-weight: 200;
+}
+.developer-note {
+	margin: 0 auto;
+	text-align: center;
+	border: 1px solid red;
 }
