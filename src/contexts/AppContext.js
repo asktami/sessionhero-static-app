@@ -62,9 +62,9 @@ export class AppProvider extends Component {
 	};
 
 	toggleExpandAll = () => {
-		this.setState({
-			toggleId: ''
-		});
+		// this.setState({
+		// 	toggleId: ''
+		// });
 		this.setState({
 			expandAll: !this.state.expandAll
 		});

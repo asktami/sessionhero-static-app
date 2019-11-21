@@ -104,13 +104,23 @@ class SearchBar extends Component {
 					</select>
 				</div>
 				<div>
-					<Link
-						to="/"
-						id="btn-expand-all"
-						onClick={this.context.toggleExpandAll}
-					>
-						{this.context.expandAll ? 'Collapse All' : 'Expand All'}
-					</Link>
+					{this.props.location.pathname === '/schedule' ? (
+						<Link
+							to="/schedule"
+							id="btn-expand-all"
+							onClick={this.context.toggleExpandAll}
+						>
+							{this.context.expandAll ? 'Collapse All' : 'Expand All'}
+						</Link>
+					) : (
+						<Link
+							to="/"
+							id="btn-expand-all"
+							onClick={this.context.toggleExpandAll}
+						>
+							{this.context.expandAll ? 'Collapse All' : 'Expand All'}
+						</Link>
+					)}
 				</div>
 			</form>
 		);
