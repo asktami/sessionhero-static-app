@@ -14,25 +14,37 @@ import './SessionListItem.css';
 export default class SessionListItem extends Component {
 	static contextType = AppContext;
 
-	addToSchedule = (sessionId, userId) => {
-		console.log('add to schedule');
+	addToSchedule = (sessionId, userId = 1) => {
+		console.log('---------- add to schedule');
 
-		Promise.all([
-			SessionApiService.addScheduleItem(sessionId, userId),
-			SessionApiService.getSchedule(),
-			SessionApiService.getSessions()
-		])
-			.then(results => {
-				const schedule = results[1];
-				const sessions = results[2];
+		// FAKE IT WITH STATE
+		SessionApiService.addScheduleItem(sessionId, userId).catch(
+			this.context.setError
+		);
+		let newScheduleList = [
+			...this.context.scheduleList,
+			{ sessionId: sessionId, userId: userId }
+		];
 
-				this.context.setScheduleList(schedule);
-				this.context.setSessionList(sessions);
+		console.log('after add newScheduleList = ', newScheduleList);
+		this.context.setScheduleList(newScheduleList);
 
-				// in postgres use joins instead
-				this.updateSessionList();
-			})
-			.catch(this.context.setError);
+		this.updateSessionList();
+
+		// FOR REAL DB ONLY
+		// Promise.all([
+		// 	SessionApiService.addScheduleItem(sessionId, userId),
+		// 	SessionApiService.getSchedule()
+		// ])
+		// 	.then(results => {
+		// 		const schedule = results[1];
+
+		// 		this.context.setScheduleList(schedule);
+
+		// 		// in postgres use joins instead
+		// 		this.updateSessionList();
+		// 	})
+		// 	.catch(this.context.setError);
 	};
 
 	// TBD
@@ -40,33 +52,41 @@ export default class SessionListItem extends Component {
 	// then update state for sessionList and sheduleList
 	// and do (db.json) join table for sessionList and scheduleList
 	removeFromSchedule = scheduleId => {
-		console.log('remove from schedule');
+		console.log('---------- remove from schedule');
 
-		// SessionApiService.deleteScheduleItem(scheduleId)
-		// 	.then(this.context.setScheduleList)
+		// FAKE IT WITH STATE
+		SessionApiService.deleteScheduleItem(scheduleId).catch(
+			this.context.setError
+		);
+		let newScheduleList = this.context.scheduleList.filter(
+			schedule => schedule.id !== scheduleId
+		);
+
+		console.log('after remove newScheduleList = ', newScheduleList);
+
+		this.context.setScheduleList(newScheduleList);
+
+		this.updateSessionList();
+
+		// Promise.all([
+		// 	SessionApiService.deleteScheduleItem(scheduleId),
+		// 	SessionApiService.getSchedule()
+		// ])
+		// 	.then(results => {
+		// 		const schedule = results[1];
+
+		// 		this.context.setScheduleList(schedule);
+
+		// 		// in postgres use joins instead
+		// 		this.updateSessionList();
+		// 	})
 		// 	.catch(this.context.setError);
-
-		Promise.all([
-			SessionApiService.deleteScheduleItem(scheduleId),
-			SessionApiService.getSchedule(),
-			SessionApiService.getSessions()
-		])
-			.then(results => {
-				const schedule = results[1];
-				const sessions = results[2];
-
-				this.context.setScheduleList(schedule);
-				this.context.setSessionList(sessions);
-
-				// in postgres use joins instead
-				this.updateSessionList();
-			})
-			.catch(this.context.setError);
 	};
 
 	updateSessionList() {
 		const { sessionList = [], scheduleList = [] } = this.context;
 
+		// FAKE IT
 		// automatically updates sessionList in context
 		sessionList.forEach(session => {
 			scheduleList.forEach(schedule => {
@@ -77,8 +97,12 @@ export default class SessionListItem extends Component {
 			});
 		});
 
+		console.log('sessionListItem update sessionList = ', sessionList);
+
 		// to update scheduleList in context
 		let newScheduleList = sessionList.filter(session => session.userId === 1);
+
+		console.log('sessionListItem update newScheduleList = ', newScheduleList);
 
 		this.context.setScheduleList(newScheduleList);
 	}
