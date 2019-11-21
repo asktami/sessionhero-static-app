@@ -14,22 +14,29 @@ import './SessionListItem.css';
 export default class SessionListItem extends Component {
 	static contextType = AppContext;
 
+	// ALWAYS use loggedIn userId
 	addToSchedule = (sessionId, userId = 1) => {
 		console.log('---------- add to schedule');
 
 		// FAKE IT WITH STATE
-		SessionApiService.addScheduleItem(sessionId, userId).catch(
-			this.context.setError
-		);
-		let newScheduleList = [
-			...this.context.scheduleList,
-			{ sessionId: sessionId, userId: userId }
-		];
+		//  session added to schedule
+		// find that sessionId in sessionList
+		// create an array that is just that record from sessionList
+		// add that array to the existing scheduleList
 
-		console.log('after add newScheduleList = ', newScheduleList);
+		this.context.sessionList.forEach(session => {
+			if (session.id === sessionId) {
+				session.userId = 1;
+			}
+		});
+
+		let newScheduleList = this.context.sessionList.filter(
+			session => session.userId === userId
+		);
+
 		this.context.setScheduleList(newScheduleList);
 
-		this.updateSessionList();
+		console.log('after ADD new scheduleList = ', this.context.scheduleList);
 
 		// FOR REAL DB ONLY
 		// Promise.all([
@@ -47,27 +54,28 @@ export default class SessionListItem extends Component {
 		// 	.catch(this.context.setError);
 	};
 
-	// TBD
-	// when add/remove from schedule need to add / remove record in db
-	// then update state for sessionList and sheduleList
-	// and do (db.json) join table for sessionList and scheduleList
-	removeFromSchedule = scheduleId => {
+	removeFromSchedule = sessionId => {
 		console.log('---------- remove from schedule');
 
 		// FAKE IT WITH STATE
-		SessionApiService.deleteScheduleItem(scheduleId).catch(
-			this.context.setError
-		);
-		let newScheduleList = this.context.scheduleList.filter(
-			schedule => schedule.id !== scheduleId
-		);
+		// set removed sessionList userId to blank
+		// remove session from schedule  = create new scheduleList from sessionList
 
-		console.log('after remove newScheduleList = ', newScheduleList);
+		this.context.sessionList.map(session => {
+			if (session.id === sessionId) {
+				session.userId = '';
+			}
+		});
+
+		let newScheduleList = this.context.scheduleList.filter(
+			session => session.id !== sessionId
+		);
 
 		this.context.setScheduleList(newScheduleList);
 
-		this.updateSessionList();
+		console.log('after REMOVE new scheduleList = ', this.context.scheduleList);
 
+		// FOR REAL DB ONLY
 		// Promise.all([
 		// 	SessionApiService.deleteScheduleItem(scheduleId),
 		// 	SessionApiService.getSchedule()
@@ -92,7 +100,6 @@ export default class SessionListItem extends Component {
 			scheduleList.forEach(schedule => {
 				if (schedule.sessionId === session.id) {
 					session.userId = schedule.userId;
-					session.scheduleId = schedule.id;
 				}
 			});
 		});
@@ -183,20 +190,23 @@ export default class SessionListItem extends Component {
 							</button>
 						) : null}
 
-						{session.userId ? (
+						{/* need to be loggedIn AND session.userId === loggedIn userId */}
+						{session.userId === 1 ? (
 							<button
 								className="btn-add-to-schedule"
 								aria-label="add-session-to-schedule-button"
-								onClick={() => this.removeFromSchedule(session.scheduleId)}
+								onClick={() => this.removeFromSchedule(session.id)}
 							>
+								{/* userId = {session.userId} <br /> */}
 								<FontAwesomeIcon icon="star" size="2x" />
 							</button>
 						) : (
 							<button
 								className="btn-add-to-schedule"
 								aria-label="add-session-to-schedule-button"
-								onClick={() => this.addToSchedule(session.id, session.userId)}
+								onClick={() => this.addToSchedule(session.id)}
 							>
+								{/* userId = {session.userId} <br /> */}
 								<FontAwesomeIcon icon={['far', 'star']} size="2x" />
 							</button>
 						)}

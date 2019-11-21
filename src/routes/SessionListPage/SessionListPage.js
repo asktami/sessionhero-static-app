@@ -30,7 +30,6 @@ export default class SessionListPage extends Component {
 
 	// TBD update sessionList:
 	// combine sessionList and scheduleList so have login userId in session record
-	// ALSO need schedule.id in the join!
 	// in postgres use joins instead
 	updateSessionList() {
 		const { sessionList = [], scheduleList = [] } = this.context;
@@ -40,7 +39,6 @@ export default class SessionListPage extends Component {
 			scheduleList.forEach(schedule => {
 				if (schedule.sessionId === session.id) {
 					session.userId = schedule.userId;
-					session.scheduleId = schedule.id;
 				}
 			});
 		});
