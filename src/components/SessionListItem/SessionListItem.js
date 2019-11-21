@@ -191,7 +191,7 @@ export default class SessionListItem extends Component {
 						) : null}
 
 						{/* need to be loggedIn AND session.userId === loggedIn userId */}
-						{session.userId === 1 ? (
+						{parseInt(session.userId) === 1 ? (
 							<button
 								className="btn-add-to-schedule"
 								aria-label="add-session-to-schedule-button"

@@ -660,6 +660,13 @@ p.comment-user {
 	color: #fff;
 }
 
+.btn-save-comment:disabled,
+.btn-save-comment[disabled] {
+	border: 1px solid #999999;
+	background-color: #cccccc;
+	color: #666666;
+}
+
 /*   RATING STARS FOR RADIO BUTTONS **** */
 
 div.stars {

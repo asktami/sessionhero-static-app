@@ -1,11 +1,11 @@
 import React from 'react';
 import config from '../../config';
-import SessionContext from '../../contexts/SessionContext';
+import AppContext from '../../contexts/AppContext';
 import SessionApiService from '../../services/session-api-service';
 import ValidationError from '../../ValidationError';
 
 class EditComment extends React.Component {
-	static contextType = SessionContext;
+	static contextType = AppContext;
 
 	state = {
 		apiError: null,

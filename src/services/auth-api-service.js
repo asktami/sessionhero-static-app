@@ -11,6 +11,8 @@ const AuthApiService = {
 		}).then(res =>
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
+
+		// grab logged in userId from res.json()
 	},
 
 	postUser(user) {

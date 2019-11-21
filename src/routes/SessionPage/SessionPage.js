@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SessionContext from '../../contexts/SessionContext';
+import AppContext from '../../contexts/AppContext';
 import SessionApiService from '../../services/session-api-service';
 import SessionListItem from '../../components/SessionListItem/SessionListItem';
 import SessionComments from '../../components/SessionComments/SessionComments';
@@ -12,7 +12,7 @@ export default class SessionPage extends Component {
 		match: { params: {} }
 	};
 
-	static contextType = SessionContext;
+	static contextType = AppContext;
 
 	componentDidMount() {
 		const { sessionId } = this.props.match.params;
@@ -25,8 +25,6 @@ export default class SessionPage extends Component {
 		SessionApiService.getSessionComments(sessionId)
 			.then(this.context.setComments)
 			.catch(this.context.setError);
-
-		console.log(this.context.comments);
 	}
 
 	componentWillUnmount() {
@@ -35,6 +33,7 @@ export default class SessionPage extends Component {
 
 	renderSession() {
 		const { session } = this.context;
+
 		return (
 			<>
 				<SessionListItem

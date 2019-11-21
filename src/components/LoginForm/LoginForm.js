@@ -62,6 +62,14 @@ export default class LoginForm extends Component {
 					<input required name="password" type="password" id="password" />
 				</div>
 				<button className="btn-basic">Login</button>
+
+				<br />
+				<br />
+				<div className="developer-note">
+					Note: during this test:
+					<br />
+					You can login with ANY username and password
+				</div>
 			</form>
 		);
 	}

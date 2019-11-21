@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import SessionContext from '../../contexts/SessionContext';
+import AppContext from '../../contexts/AppContext';
 import SessionApiService from '../../services/session-api-service';
 import './CommentForm.css';
 
 export default class CommentForm extends Component {
-	static contextType = SessionContext;
+	static contextType = AppContext;
 
 	handleSubmit = e => {
 		e.preventDefault();
