@@ -51,23 +51,8 @@ export default class SessionListPage extends Component {
 		this.context.setScheduleList(newScheduleList);
 	}
 
-	addToSchedule = (sessionId, userId) => {
-		console.log('add to schedule');
-
-		SessionApiService.addScheduleItem(sessionId, userId)
-			.then(this.context.setSessionList)
-			.catch(this.context.setError);
-	};
-
-	removeFromSchedule = scheduleId => {
-		console.log('remove from schedule');
-		SessionApiService.deleteScheduleItem(scheduleId)
-			.then(this.context.setScheduleList)
-			.catch(this.context.setError);
-	};
-
 	renderSessions() {
-		const { sessionList = [], setToggleId, toggleId, expandAll } = this.context;
+		const { sessionList = [] } = this.context;
 
 		// apply search filters: filterDay and filterTrack
 		return sessionList
@@ -84,12 +69,7 @@ export default class SessionListPage extends Component {
 				<li className="item" key={session.id}>
 					<SessionListItem
 						session={session}
-						setToggleId={setToggleId}
-						toggleId={toggleId}
-						expandAll={expandAll}
 						pathname={this.props.location.pathname}
-						addToSchedule={this.addToSchedule}
-						removeFromSchedule={this.removeFromSchedule}
 					/>
 				</li>
 			));

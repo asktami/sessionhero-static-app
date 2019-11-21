@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import AppContext from '../../contexts/AppContext';
+import SessionApiService from '../../services/session-api-service';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -10,9 +12,80 @@ import {
 import './SessionListItem.css';
 
 export default class SessionListItem extends Component {
+	static contextType = AppContext;
+
+	addToSchedule = (sessionId, userId) => {
+		console.log('add to schedule');
+
+		Promise.all([
+			SessionApiService.addScheduleItem(sessionId, userId),
+			SessionApiService.getSchedule(),
+			SessionApiService.getSessions()
+		])
+			.then(results => {
+				const schedule = results[1];
+				const sessions = results[2];
+
+				this.context.setScheduleList(schedule);
+				this.context.setSessionList(sessions);
+
+				// in postgres use joins instead
+				this.updateSessionList();
+			})
+			.catch(this.context.setError);
+	};
+
+	// TBD
+	// when add/remove from schedule need to add / remove record in db
+	// then update state for sessionList and sheduleList
+	// and do (db.json) join table for sessionList and scheduleList
+	removeFromSchedule = scheduleId => {
+		console.log('remove from schedule');
+
+		// SessionApiService.deleteScheduleItem(scheduleId)
+		// 	.then(this.context.setScheduleList)
+		// 	.catch(this.context.setError);
+
+		Promise.all([
+			SessionApiService.deleteScheduleItem(scheduleId),
+			SessionApiService.getSchedule(),
+			SessionApiService.getSessions()
+		])
+			.then(results => {
+				const schedule = results[1];
+				const sessions = results[2];
+
+				this.context.setScheduleList(schedule);
+				this.context.setSessionList(sessions);
+
+				// in postgres use joins instead
+				this.updateSessionList();
+			})
+			.catch(this.context.setError);
+	};
+
+	updateSessionList() {
+		const { sessionList = [], scheduleList = [] } = this.context;
+
+		// automatically updates sessionList in context
+		sessionList.forEach(session => {
+			scheduleList.forEach(schedule => {
+				if (schedule.sessionId === session.id) {
+					session.userId = schedule.userId;
+					session.scheduleId = schedule.id;
+				}
+			});
+		});
+
+		// to update scheduleList in context
+		let newScheduleList = sessionList.filter(session => session.userId === 1);
+
+		this.context.setScheduleList(newScheduleList);
+	}
+
 	render() {
-		const { session, setToggleId, toggleId, expandAll } = this.props;
-		console.log('sessionListItem props =', this.props.location);
+		const { setToggleId, toggleId, expandAll } = this.context;
+		const { session, pathname } = this.props;
 
 		return (
 			<>
@@ -71,7 +144,7 @@ export default class SessionListItem extends Component {
 					</div>
 
 					<div className="flex-col">
-						{!expandAll && !this.props.pathname.includes('/sessions/') ? (
+						{!expandAll && !pathname.includes('/sessions/') ? (
 							<button
 								className="btn-expand-item"
 								aria-expanded="false"
@@ -90,9 +163,7 @@ export default class SessionListItem extends Component {
 							<button
 								className="btn-add-to-schedule"
 								aria-label="add-session-to-schedule-button"
-								onClick={() =>
-									this.props.removeFromSchedule(session.scheduleId)
-								}
+								onClick={() => this.removeFromSchedule(session.scheduleId)}
 							>
 								<FontAwesomeIcon icon="star" size="2x" />
 							</button>
@@ -100,9 +171,7 @@ export default class SessionListItem extends Component {
 							<button
 								className="btn-add-to-schedule"
 								aria-label="add-session-to-schedule-button"
-								onClick={() =>
-									this.props.addToSchedule(session.id, session.userId)
-								}
+								onClick={() => this.addToSchedule(session.id, session.userId)}
 							>
 								<FontAwesomeIcon icon={['far', 'star']} size="2x" />
 							</button>
@@ -115,7 +184,7 @@ export default class SessionListItem extends Component {
 						'flex-footer-row toggle-content ' +
 						(expandAll ||
 						toggleId === session.id ||
-						this.props.pathname.includes('/sessions/')
+						pathname.includes('/sessions/')
 							? 'is-visible'
 							: null)
 					}

@@ -29,35 +29,16 @@ export default class SessionPage extends Component {
 		console.log(this.context.comments);
 	}
 
-	addToSchedule = (sessionId, userId) => {
-		console.log.logrt('add to schedule');
-
-		SessionApiService.addScheduleItem(sessionId, userId)
-			.then(this.context.setSessionList)
-			.catch(this.context.setError);
-	};
-
-	removeFromSchedule = scheduleId => {
-		console.log('remove from schedule');
-
-		SessionApiService.deleteScheduleItem(scheduleId)
-			.then(this.context.setScheduleList)
-			.catch(this.context.setError);
-	};
-
 	componentWillUnmount() {
 		this.context.clearSession();
 	}
 
 	renderSession() {
-		const { session, setToggleId, toggleId, expandAll } = this.context;
+		const { session } = this.context;
 		return (
 			<>
 				<SessionListItem
 					session={session}
-					setToggleId={setToggleId}
-					toggleId={toggleId}
-					expandAll={expandAll}
 					pathname={this.props.location.pathname}
 				/>
 				<SessionComments />

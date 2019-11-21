@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AppContext from '../../contexts/AppContext';
-import SessionApiService from '../../services/session-api-service';
 import SessionListItem from '../../components/SessionListItem/SessionListItem';
 
 import './ScheduleListPage.css';
@@ -12,19 +11,8 @@ export default class ScheduleListPage extends Component {
 		this.context.clearFilters();
 	}
 
-	removeFromSchedule = scheduleId => {
-		SessionApiService.deleteScheduleItem(scheduleId)
-			.then(this.context.setScheduleList)
-			.catch(this.context.setError);
-	};
-
 	renderSchedule() {
-		const {
-			scheduleList = [],
-			setToggleId,
-			toggleId,
-			expandAll
-		} = this.context;
+		const { scheduleList = [] } = this.context;
 
 		// apply search filters: filterDay and filterTrack
 		return scheduleList
@@ -41,9 +29,6 @@ export default class ScheduleListPage extends Component {
 				<li className="item" key={session.id}>
 					<SessionListItem
 						session={session}
-						setToggleId={setToggleId}
-						toggleId={toggleId}
-						expandAll={expandAll}
 						pathname={this.props.location.pathname}
 					/>
 				</li>
