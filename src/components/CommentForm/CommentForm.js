@@ -8,15 +8,15 @@ export default class CommentForm extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
-		const { session } = this.context;
+		const { session, addComment, setError } = this.context;
 		const { text, rating } = e.target;
 
 		SessionApiService.addComment(session.id, text.value, Number(rating.value))
-			.then(this.context.addComment)
+			.then(addComment)
 			.then(() => {
 				text.value = '';
 			})
-			.catch(this.context.setError);
+			.catch(setError);
 	};
 
 	render() {

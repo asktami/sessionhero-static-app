@@ -56,15 +56,12 @@ export class AppProvider extends Component {
 		});
 	};
 
-	clearFilters = () => {
+	clearFilters = e => {
 		this.setState({ filterDay: '' });
 		this.setState({ filterTrack: '' });
 	};
 
 	toggleExpandAll = () => {
-		// this.setState({
-		// 	toggleId: ''
-		// });
 		this.setState({
 			expandAll: !this.state.expandAll
 		});

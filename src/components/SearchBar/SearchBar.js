@@ -28,19 +28,24 @@ class SearchBar extends Component {
 	}
 
 	renderSearchBar() {
+		const {
+			filterDay,
+			filterTrack,
+			setFilterDay,
+			setFilterTrack,
+			clearFilters,
+			toggleExpandAll,
+			expandAll
+		} = this.context;
 		return (
 			<form className="search-bar">
 				<div>
 					{this.props.location.pathname === '/schedule' ? (
-						<Link
-							to="/schedule"
-							id="btn-show-all"
-							onClick={this.context.clearFilters}
-						>
+						<Link to="/schedule" id="btn-show-all" onClick={clearFilters}>
 							Show All
 						</Link>
 					) : (
-						<Link to="/" id="btn-show-all" onClick={this.context.clearFilters}>
+						<Link to="/" id="btn-show-all" onClick={clearFilters}>
 							Show All
 						</Link>
 					)}
@@ -50,8 +55,8 @@ class SearchBar extends Component {
 						id="filter-day"
 						name="filter-day"
 						aria-label="Select by Day"
-						value={this.context.filterDay}
-						onChange={e => this.context.setFilterDay(e.target.value)}
+						value={filterDay}
+						onChange={e => setFilterDay(e.target.value)}
 					>
 						<option value="">Select by Day</option>
 						<option value="mon" data-filter="mon">
@@ -73,8 +78,8 @@ class SearchBar extends Component {
 						id="filter-track"
 						name="filter-track"
 						aria-label="Select by Track"
-						value={this.context.filterTrack}
-						onChange={e => this.context.setFilterTrack(e.target.value)}
+						value={filterTrack}
+						onChange={e => setFilterTrack(e.target.value)}
 					>
 						<option value="">Select by Track</option>
 						<option value="training" data-filter="training">
@@ -104,34 +109,21 @@ class SearchBar extends Component {
 					</select>
 				</div>
 				<div>
-					{this.props.location.pathname === '/schedule' ? (
-						<Link
-							to="/schedule"
-							id="btn-expand-all"
-							onClick={this.context.toggleExpandAll}
-						>
-							{this.context.expandAll ? 'Collapse All' : 'Expand All'}
-						</Link>
-					) : (
-						<Link
-							to="/"
-							id="btn-expand-all"
-							onClick={this.context.toggleExpandAll}
-						>
-							{this.context.expandAll ? 'Collapse All' : 'Expand All'}
-						</Link>
-					)}
+					<Link
+						to={
+							this.props.location.pathname === '/schedule' ? '/schedule' : '/'
+						}
+						id="btn-expand-all"
+						onClick={e => toggleExpandAll(e.target.value)}
+					>
+						{expandAll ? 'Collapse All' : 'Expand All'}
+					</Link>
 				</div>
 			</form>
 		);
 	}
 
 	render() {
-		console.log(this.props);
-		console.log(this.props.location.search);
-		console.log('filterDay = ', this.context.filterDay);
-		console.log('filterTrack = ', this.context.filterTrack);
-
 		return (
 			<section className="search-section">
 				{this.renderMessage()}
