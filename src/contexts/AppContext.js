@@ -76,7 +76,6 @@ export class AppProvider extends Component {
 		});
 	};
 
-	// TBD
 	setToggleId = id => {
 		if (this.state.toggleId === id) {
 			this.setState({
@@ -87,11 +86,6 @@ export class AppProvider extends Component {
 				toggleId: id
 			});
 		}
-
-		// TBD - does not work - why???
-		// this.setState((prevState, id) => ({
-		// 	toggleId: prevState.toggleId === id ? '' : id
-		// }));
 	};
 
 	setSession = session => {
