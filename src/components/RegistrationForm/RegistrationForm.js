@@ -11,23 +11,18 @@ export default class RegistrationForm extends Component {
 
 	handleSubmit = ev => {
 		ev.preventDefault();
-		const { fullname, nick_name, username, password } = ev.target;
-
-		// console.log('registration form submitted');
-		// console.log({ fullname, nick_name, username, password });
+		const { username, password, fullname } = ev.target;
 
 		this.setState({ error: null });
 		AuthApiService.postUser({
 			username: username.value,
 			password: password.value,
-			fullname: fullname.value,
-			nickname: nick_name.value
+			fullname: fullname.value
 		})
 			.then(user => {
-				fullname.value = '';
-				nick_name.value = '';
 				username.value = '';
 				password.value = '';
+				fullname.value = '';
 				this.props.onRegistrationSuccess();
 			})
 			.catch(res => {
