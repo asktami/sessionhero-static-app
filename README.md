@@ -2,7 +2,7 @@
 
 ## Description
 
-The preliminary, tied to a fake json.db instead of postres, static version of [SessionHero](https://github.com/asktami/sessionhero-app).
+The preliminary, tied to a fake json.db instead of PostgreSQL, static version of [SessionHero](https://github.com/asktami/sessionhero-app).
 
 ---
 
